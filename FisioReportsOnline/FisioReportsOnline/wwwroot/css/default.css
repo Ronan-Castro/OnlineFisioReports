@@ -1,0 +1,15 @@
+﻿body {
+}
+
+.footer {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background-color: #AB47BC;
+}
+
+.footer p {
+    font-size: 14px;
+    color: #FFFFFF;
+}
