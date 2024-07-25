@@ -18,4 +18,9 @@
     <PackageReference Include="Extensions.MudBlazor.StaticInput" Version="2.*" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Data\Mapping\" />
+  </ItemGroup>
+
 </Project>
