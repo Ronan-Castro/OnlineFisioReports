@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FisioReportsOnline.Models
+namespace FisioReportsOnline.Models.Fisioterapico
 {
     public class PadraoMovimento
     {

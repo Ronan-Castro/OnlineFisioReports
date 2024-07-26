@@ -1,4 +1,4 @@
-﻿namespace FisioReportsOnline.Models
+﻿namespace FisioReportsOnline.Models.Fisioterapico
 {
     public class Pelve
     {

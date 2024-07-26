@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FisioReportsOnline.Models
+namespace FisioReportsOnline.Models.Fisioterapico
 {
     public class Evolucao
     {
