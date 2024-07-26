@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FisioReportsOnline.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240726004255_AddAtivoToApplicationUser")]
-    partial class AddAtivoToApplicationUser
+    [Migration("20240726143149_ConfigureAtivoWithFluentAPI")]
+    partial class ConfigureAtivoWithFluentAPI
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,9 @@ namespace FisioReportsOnline.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()

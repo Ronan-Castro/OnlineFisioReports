@@ -10,9 +10,6 @@ namespace FisioReportsOnline.Models.Fisioterapico
     {
         public int IdAvaliacao { get; set; }
 
-        public int IdPaciente { get; set; }
-        public Paciente Paciente { get; set; }
-
         public string? DiagClinico { get; set; }
         public string? DiagFisioterapeutico { get; set; }
         public string? QueixaPrincipal { get; set; }
@@ -21,6 +18,10 @@ namespace FisioReportsOnline.Models.Fisioterapico
         public string? ObjetivoTerapeutico { get; set; }
         public string? ObjetivoPessoal { get; set; }
         public DateTime DataAtendimento { get; set; }
+
+        //Relações
+        public int IdPaciente { get; set; }
+        public Paciente Paciente { get; set; }
 
         // Doenças e/ou Condições
         public DoencasCondicoes DoencasCondicoes { get; set; } = new();
