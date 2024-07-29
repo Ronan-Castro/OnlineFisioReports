@@ -8,7 +8,7 @@ namespace FisioReportsOnline.Models.Fisioterapico
         public void Configure(EntityTypeBuilder<Avaliacao> builder)
         {
             //Tabela
-            builder.ToTable("ApiConfig");
+            builder.ToTable("Avaliacao");
 
             //Chave Primária
             builder.HasKey(x => x.IdAvaliacao);
@@ -60,11 +60,6 @@ namespace FisioReportsOnline.Models.Fisioterapico
 
             //Índices
 
-            //Relações de um para muitos
-            builder.HasOne(x => x.Paciente)
-                .WithMany()
-                .HasForeignKey(x => x.IdPaciente)
-                .IsRequired();
             //Relações de um para um
             builder.HasOne(a => a.DoencasCondicoes)
                 .WithOne(dc => dc.Avaliacao)

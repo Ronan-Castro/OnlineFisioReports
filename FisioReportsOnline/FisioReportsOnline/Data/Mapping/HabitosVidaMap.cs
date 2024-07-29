@@ -1,19 +1,62 @@
-﻿namespace FisioReportsOnline.Models.Fisioterapico
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+
+namespace FisioReportsOnline.Models.Fisioterapico
 {
-    public class HabitosVidaMap
+    public class HabitosVidaMap : IEntityTypeConfiguration<HabitosVida>
     {
-        public int IdHabitosVida { get; set; }
+        public void Configure(EntityTypeBuilder<HabitosVida> builder)
+        {
+            //Tabela
+            builder.ToTable("HabitosVida");
 
-        public int IdAvaliacao { get; set; }
-        public Avaliacao Avaliacao { get; set; }
+            //Chave Primária
+            builder.HasKey(x => x.IdHabitosVida);
 
-        public bool Tabagismo { get; set; } = false;
-        public bool Etilismo { get; set; } = false;
-        public bool IngereAgua { get; set; } = false;
-        public bool Medicacao { get; set; } = false;
-        public bool Intestino { get; set; } = false;
-        public bool AtivFisica { get; set; } = false;
-        public bool Pilates { get; set; } = false;
-        public string? ObsHabitos { get; set; }
+            //Propriedades
+            builder.Property(x => x.IdHabitosVida)
+                .ValueGeneratedOnAdd()
+                .UseMySqlIdentityColumn();
+
+            builder.Property(x => x.Tabagismo)
+                .HasColumnName("Tabagismo")
+                .HasColumnType("TINYINT(1)")
+                .IsRequired(false);
+
+            builder.Property(x => x.Etilismo)
+                .HasColumnName("Etilismo")
+                .HasColumnType("TINYINT(1)")
+                .IsRequired(false);
+
+            builder.Property(x => x.IngereAgua)
+                .HasColumnName("IngereAgua")
+                .HasColumnType("TINYINT(1)")
+                .IsRequired(false);
+
+            builder.Property(x => x.Medicacao)
+                .HasColumnName("Medicacao")
+                .HasColumnType("TINYINT(1)")
+                .IsRequired(false);
+
+            builder.Property(x => x.Intestino)
+                .HasColumnName("Intestino")
+                .HasColumnType("TINYINT(1)")
+                .IsRequired(false);
+
+            builder.Property(x => x.AtivFisica)
+                .HasColumnName("AtivFisica")
+                .HasColumnType("TINYINT(1)")
+                .IsRequired(false);
+
+            builder.Property(x => x.Pilates)
+                .HasColumnName("Pilates")
+                .HasColumnType("TINYINT(1)")
+                .IsRequired(false);
+
+            builder.Property(x => x.ObsHabitos)
+                .HasColumnName("ObsHabitos")
+                .HasColumnType("TEXT")
+                .IsRequired(false);
+        }
     }
 }

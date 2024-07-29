@@ -1,4 +1,4 @@
-﻿namespace FisioReportsOnline.Models.Fisioterapico
+﻿namespace FisioReportsOnline.Models.Fisioterapico.ComposicaoExameFisico
 {
     public class Coluna
     {

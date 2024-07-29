@@ -1,17 +1,49 @@
-﻿namespace FisioReportsOnline.Models.Fisioterapico
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using FisioReportsOnline.Models.Fisioterapico.ComposicaoExameFisico;
+
+namespace FisioReportsOnline.Models.Fisioterapico
 {
-    public class PelveMap
+    public class PelveMap : IEntityTypeConfiguration<Pelve>
     {
-        public int IdPelve { get; set; }
+        public void Configure(EntityTypeBuilder<Pelve> builder)
+        {
+            //Tabela
+            builder.ToTable("Pelve");
 
-        public int IdExameFisico { get; set; }
-        public ExameFisico ExameFisico { get; set; }
+            //Chave Primária
+            builder.HasKey(x => x.IdPelve);
 
-        public bool IsNormal { get; set; } = false;
-        public bool IsAnteversao { get; set; } = false;
-        public bool IsRetroversao { get; set; } = false;
-        public bool IsElevadoDireita { get; set; } = false;
-        public bool IsElevadoEsquerda { get; set; } = false;
-        public bool IsEscoliose { get; set; } = false;
+            //Propriedades
+            builder.Property(x => x.IdPelve)
+                .ValueGeneratedOnAdd()
+                .UseMySqlIdentityColumn();
+
+            builder.Property(x => x.IsNormal)
+               .HasColumnName("Normal")
+               .HasColumnType("TINYINT(1)")
+               .IsRequired(false);
+
+            builder.Property(x => x.IsAnteversao)
+               .HasColumnName("Anteversao")
+               .HasColumnType("TINYINT(1)")
+               .IsRequired(false);
+
+            builder.Property(x => x.LadoElevado)
+               .HasColumnName("LadoElevado")
+               .HasColumnType("TINYINT")
+               .HasAnnotation("MySql:Comment", "0 - Elevado Direito e 1 - Elevado Esquerdo")
+               .IsRequired(false);
+
+            builder.Property(x => x.IsRetroversao)
+               .HasColumnName("Retroversao")
+               .HasColumnType("TINYINT(1)")
+               .IsRequired(false);
+
+            builder.Property(x => x.IsEscoliose)
+               .HasColumnName("Escoliose")
+               .HasColumnType("TINYINT(1)")
+               .IsRequired(false);
+        }
     }
 }

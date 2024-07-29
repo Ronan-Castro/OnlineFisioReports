@@ -1,4 +1,6 @@
-﻿namespace FisioReportsOnline.Models.Fisioterapico
+﻿using FisioReportsOnline.Models.Fisioterapico.ComposicaoExameFisico;
+
+namespace FisioReportsOnline.Models.Fisioterapico
 {
     public class ExameFisico
     {

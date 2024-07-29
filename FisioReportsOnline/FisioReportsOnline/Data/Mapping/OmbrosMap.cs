@@ -1,16 +1,45 @@
-﻿namespace FisioReportsOnline.Models.Fisioterapico
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using FisioReportsOnline.Models.Fisioterapico.ExameFisico;
+using FisioReportsOnline.Models.Fisioterapico.ComposicaoExameFisico;
+
+namespace FisioReportsOnline.Models.Fisioterapico
 {
-    public class OmbrosMap
+    public class OmbrosMap : IEntityTypeConfiguration<Ombros>
     {
-        public int IdOmbros { get; set; }
+        public void Configure(EntityTypeBuilder<Ombros> builder)
+        {
+            //Tabela
+            builder.ToTable("Ombros");
 
-        public int IdExameFisico { get; set; }
-        public ExameFisico ExameFisico { get; set; }
+            //Chave Primária
+            builder.HasKey(x => x.IdOmbros);
 
-        public bool IsNormal { get; set; }
-        public bool IsAnteriorizada { get; set; }
-        public bool IsElevadoDireito { get; set; }
-        public bool IsElevadoEsquerdo { get; set; }
-        public bool IsEscapulaAlada { get; set; }
+            //Propriedades
+            builder.Property(x => x.IdOmbros)
+                .ValueGeneratedOnAdd()
+                .UseMySqlIdentityColumn();
+
+            builder.Property(x => x.IsNormal)
+               .HasColumnName("Normal")
+               .HasColumnType("TINYINT(1)")
+               .IsRequired(false);
+
+            builder.Property(x => x.IsAnteriorizada)
+               .HasColumnName("Anteriorizada")
+               .HasColumnType("TINYINT(1)")
+               .IsRequired(false);
+
+            builder.Property(x => x.LadoElevado)
+               .HasColumnName("LadoElevado")
+               .HasColumnType("TINYINT")
+               .HasAnnotation("MySql:Comment", "0 - Elevado Direito e 1 - Elevado Esquerdo")
+               .IsRequired(false);
+
+            builder.Property(x => x.IsEscapulaAlada)
+               .HasColumnName("EscapulaAlada")
+               .HasColumnType("TINYINT(1)")
+               .IsRequired(false);
+        }
     }
 }
