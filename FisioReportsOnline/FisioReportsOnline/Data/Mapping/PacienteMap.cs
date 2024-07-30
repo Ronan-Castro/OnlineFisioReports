@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FisioReportsOnline.Models;
+using FisioReportsOnline.Models.Fisioterapico;
 
-namespace FisioReportsOnline.Models.Fisioterapico
+namespace FisioReportsOnline.Data.Mapping
 {
     public class PacienteMap : IEntityTypeConfiguration<Paciente>
     {
@@ -71,7 +73,7 @@ namespace FisioReportsOnline.Models.Fisioterapico
 
             //Relações de um para um
             builder.HasOne(p => p.Endereco)
-                .WithOne(e => e.Paciente)
+                .WithOne()
                 .HasForeignKey<Endereco>(e => e.IdPaciente)
                 .IsRequired();
         }

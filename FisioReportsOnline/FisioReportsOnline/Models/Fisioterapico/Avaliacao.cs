@@ -24,10 +24,10 @@ namespace FisioReportsOnline.Models.Fisioterapico
         public Paciente Paciente { get; set; }
 
         // Doenças e/ou Condições
-        public DoencasCondicoes DoencasCondicoes { get; set; } = new();
+        public DoencaCondicao DoencasCondicoes { get; set; } = new();
 
         // Hábitos de Vida
-        public HabitosVida HabitosVida { get; set; } = new();
+        public HabitoVida HabitosVida { get; set; } = new();
 
         // Exame Físico
         public ExameFisico ExameFisico { get; set; } = new();

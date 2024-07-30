@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using FisioReportsOnline.Models.Fisioterapico.ComposicaoExameFisico;
 
-namespace FisioReportsOnline.Models.Fisioterapico.ExameFisico
+namespace FisioReportsOnline.Data.Mapping
 {
     public class ColunaMap : IEntityTypeConfiguration<Coluna>
     {

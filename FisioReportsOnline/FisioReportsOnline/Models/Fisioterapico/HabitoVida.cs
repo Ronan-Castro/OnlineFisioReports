@@ -1,12 +1,9 @@
 ﻿namespace FisioReportsOnline.Models.Fisioterapico
 {
-    public class HabitosVida
+    public class HabitoVida
     {
         public int IdHabitosVida { get; set; }
-
         public int IdAvaliacao { get; set; }
-        public Avaliacao Avaliacao { get; set; }
-
         public bool Tabagismo { get; set; } = false;
         public bool Etilismo { get; set; } = false;
         public bool IngereAgua { get; set; } = false;

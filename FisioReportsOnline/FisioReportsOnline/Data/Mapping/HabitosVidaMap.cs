@@ -1,17 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using FisioReportsOnline.Models.Fisioterapico;
 
-namespace FisioReportsOnline.Models.Fisioterapico
+namespace FisioReportsOnline.Data.Mapping
 {
-    public class HabitosVidaMap : IEntityTypeConfiguration<HabitosVida>
+    public class HabitosVidaMap : IEntityTypeConfiguration<HabitoVida>
     {
-        public void Configure(EntityTypeBuilder<HabitosVida> builder)
+        public void Configure(EntityTypeBuilder<HabitoVida> builder)
         {
             //Tabela
             builder.ToTable("HabitosVida");
 
             //Chave Primária
             builder.HasKey(x => x.IdHabitosVida);
+
+            //Chave estrangeira
+            builder.HasIndex(dc => dc.IdAvaliacao).IsUnique();
 
             //Propriedades
             builder.Property(x => x.IdHabitosVida)

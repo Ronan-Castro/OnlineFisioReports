@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace FisioReportsOnline.Models.Fisioterapico
 {
-    public class DoencasCondicoes
+    public class DoencaCondicao
     {
         public int IdDoencasCondicoes { get; set; }
-
         public int IdAvaliacao { get; set; }
-        public Avaliacao Avaliacao { get; set; }
 
         public bool Metabolica { get; set; } = false;
         public bool Cardiaca { get; set; } = false;

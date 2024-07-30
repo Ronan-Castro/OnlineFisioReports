@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FisioReportsOnline.Models.Fisioterapico;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FisioReportsOnline.Models.Fisioterapico
+namespace FisioReportsOnline.Data.Mapping
 {
     public class AvaliacaoMap : IEntityTypeConfiguration<Avaliacao>
     {
@@ -62,18 +63,18 @@ namespace FisioReportsOnline.Models.Fisioterapico
 
             //Relações de um para um
             builder.HasOne(a => a.DoencasCondicoes)
-                .WithOne(dc => dc.Avaliacao)
-                .HasForeignKey<DoencasCondicoes>(dc => dc.IdAvaliacao)
+                .WithOne()
+                .HasForeignKey<DoencaCondicao>(dc => dc.IdAvaliacao)
                 .IsRequired();
 
             builder.HasOne(x => x.ExameFisico)
-                .WithOne(ef => ef.Avaliacao)
+                .WithOne()
                 .HasForeignKey<ExameFisico>(ef => ef.IdAvaliacao)
                 .IsRequired();
 
             builder.HasOne(x => x.HabitosVida)
-                .WithOne(hv => hv.Avaliacao)
-                .HasForeignKey<HabitosVida>(hv => hv.IdAvaliacao)
+                .WithOne()
+                .HasForeignKey<HabitoVida>(hv => hv.IdAvaliacao)
                 .IsRequired();
         }
     }

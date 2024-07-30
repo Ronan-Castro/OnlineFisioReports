@@ -6,7 +6,6 @@ namespace FisioReportsOnline.Models
     {
         public int IdEndereco { get; set; }
         public int IdPaciente { get; set; }
-        public Paciente Paciente { get; set; }
         public string Rua { get; set; }
         public string Bairro { get; set; }
         public string Cidade { get; set; }

@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using FisioReportsOnline.Models.Fisioterapico.ExameFisico;
 using FisioReportsOnline.Models.Fisioterapico.ComposicaoExameFisico;
 
-namespace FisioReportsOnline.Models.Fisioterapico
+namespace FisioReportsOnline.Data.Mapping
 {
-    public class OmbrosMap : IEntityTypeConfiguration<Ombros>
+    public class OmbrosMap : IEntityTypeConfiguration<Ombro>
     {
-        public void Configure(EntityTypeBuilder<Ombros> builder)
+        public void Configure(EntityTypeBuilder<Ombro> builder)
         {
             //Tabela
             builder.ToTable("Ombros");

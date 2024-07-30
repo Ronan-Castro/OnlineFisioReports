@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using FisioReportsOnline.Models.Fisioterapico.ComposicaoExameFisico;
 
-namespace FisioReportsOnline.Models.Fisioterapico
+namespace FisioReportsOnline.Data.Mapping
 {
     public class PelveMap : IEntityTypeConfiguration<Pelve>
     {

@@ -1,18 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using FisioReportsOnline.Models.Fisioterapico.ComposicaoExameFisico;
+using FisioReportsOnline.Models.Fisioterapico;
 
-namespace FisioReportsOnline.Models.Fisioterapico
+namespace FisioReportsOnline.Data.Mapping
 {
     public class ExameFisicoMap : IEntityTypeConfiguration<ExameFisico>
     {
         public void Configure(EntityTypeBuilder<ExameFisico> builder)
-        {  
+        {
             //Tabela
             builder.ToTable("ExameFisico");
 
             //Chave Primária
             builder.HasKey(x => x.IdExameFisico);
+
+            //Chave estrangeira
+            builder.HasIndex(dc => dc.IdAvaliacao).IsUnique();
 
             //Propriedades
             builder.Property(x => x.IdExameFisico)
@@ -71,17 +75,17 @@ namespace FisioReportsOnline.Models.Fisioterapico
 
             //Relações um para um
             builder.HasOne(ex => ex.Ombros)
-                .WithOne(o => o.ExameFisico)
-                .HasForeignKey<Ombros>(o => o.IdExameFisico)
+                .WithOne()
+                .HasForeignKey<Ombro>(o => o.IdExameFisico)
                 .IsRequired();
 
             builder.HasOne(ex => ex.Coluna)
-                .WithOne(c => c.ExameFisico)
+                .WithOne()
                 .HasForeignKey<Coluna>(c => c.IdExameFisico)
                 .IsRequired();
 
             builder.HasOne(ex => ex.Pelve)
-                .WithOne(p => p.ExameFisico)
+                .WithOne()
                 .HasForeignKey<Pelve>(p => p.IdExameFisico)
                 .IsRequired();
         }

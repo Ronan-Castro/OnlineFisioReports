@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FisioReportsOnline.Models.Fisioterapico;
 
-namespace FisioReportsOnline.Models.Fisioterapico
+namespace FisioReportsOnline.Data.Mapping
 {
     public class EvolucaoMap : IEntityTypeConfiguration<Evolucao>
     {
