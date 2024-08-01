@@ -1,102 +1,17 @@
 ﻿@page "/Avaliacao"
 
-@*attribute [Authorize]*@
+@*attribute [Authorize]
 
-<MudText Typo="Typo.h3" Class="mx-9">Painel</MudText>
+realizar aqui processo de busca do paciente
+refresh da página para avaliação dele
+ao clicar para avaliar redirecionar
+ao clicar para listar evolução abrir modal
 
-<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
-    <MudGrid Spacing="12">
-        <MudItem xs="12" sm="12" md="12" lg="6">
-            <MudGrid Spacing="12">
-                <MudItem xs="6" sm="6" md="6" Style="height: 180px;">
-                    <MudCard Class="m-2" Elevation="5">
-                        <MudCardContent>
-                            <MudText Typo="Typo.h4">38</MudText>
-                            <MudText Typo="Typo.h5">Atendimento</MudText>
-                        </MudCardContent>
-                    </MudCard>
-                </MudItem>
-                <MudItem xs="6" sm="6" md="6" Style="height: 180px;">
-                    <MudCard Class="m-2" Elevation="5">
-                        <MudCardContent>
-                            <MudText Typo="Typo.h4">34</MudText>
-                            <MudText Typo="Typo.h5">Realizados</MudText>
-                        </MudCardContent>
-                    </MudCard>
-                </MudItem>
-                <MudItem sm="12" xs="12" md="12">
-                    <MudPaper Class="d-flex flex-column mt-4" Elevation="5">
-                        <MudText Typo="Typo.h5" Style="margin: 15px" GutterBottom="true">Atendimentos Realizados</MudText>
-                        @for (int i = 0; i < 5; i++)
-                        {
-                            <MudCard Class="m-2">
-                                <MudCardContent>
-                                    <MudText>Story of the day</MudText>
-                                    <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
-                                </MudCardContent>
-                                <MudCardActions>
-                                    <MudButton Variant="Variant.Outlined" Disabled="@_processing" OnClick="ProcessSomething" ClickPropagation="true" Style="@($"color:{Colors.Purple.Lighten1}; border-color:{Colors.Purple.Lighten1};")">
-                                        @if (_processing)
-                                        {
-                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                            <MudText Class="ms-2">Processing</MudText>
-                                        }
-                                        else
-                                        {
-                                            <MudText>Atendimento Realizado</MudText>
-                                        }
-                                    </MudButton>
+*@
 
-                                <MudButton Variant="Variant.Outlined" Disabled="@_processing" OnClick="ProcessSomething" ClickPropagation="true" Style="@($"margin-left: 10px; color:{Colors.Purple.Lighten1}; border-color:{Colors.Purple.Lighten1};")">
-                                        @if (_processing)
-                                        {
-                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                            <MudText Class="ms-2">Processing</MudText>
-                                        }
-                                        else
-                                        {
-                                            <MudText>Evolução</MudText>
-                                        }
-                                    </MudButton>
-                                </MudCardActions>
-                            </MudCard>
-                        }
-                    </MudPaper>
-                </MudItem>
-            </MudGrid>
-        </MudItem>
-       
-        <MudItem md="12" xs="12" lg="6">
-            <MudPaper Elevation="5">
-                <MudText Typo="Typo.h5" Style="margin: 15px" GutterBottom="true">Atendimentos Hoje</MudText>
-                <MudList T="string">
-                    @for (int i = 0; i < 6; i++)
-                    {
-                        <MudListItem>
-                            <MudCard>
-                            <MudCardContent>
-                                <MudText>Story of the day</MudText>
-                                <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
-                            </MudCardContent>
-                            <MudCardActions>
-                                    <MudButton Variant="Variant.Outlined" Style="@($"color:{Colors.Purple.Lighten1}; border-color:{Colors.Purple.Lighten1};")">Learn More</MudButton>
-                            </MudCardActions>
-                        </MudCard>
-                    </MudListItem>         
-                    }           
-                </MudList>
-            </MudPaper>
-        </MudItem>      
-    </MudGrid>
-</MudContainer>
+
+
 
 @code {
-    private bool _processing = false;
 
-    async Task ProcessSomething()
-    {
-        _processing = true;
-        await Task.Delay(2000);
-        _processing = false;
-    }
 }

@@ -21,23 +21,19 @@ namespace FisioReportsOnline.Data.Mapping
 
             builder.Property(x => x.IsNormal)
                .HasColumnName("Normal")
-               .HasColumnType("TINYINT(1)")
-               .IsRequired(false);
+               .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.IsEscoliose)
                .HasColumnName("Escoliose")
-               .HasColumnType("TINYINT(1)")
-               .IsRequired(false);
+               .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.IsHipercifose)
                .HasColumnName("Hipercifose")
-               .HasColumnType("TINYINT(1)")
-               .IsRequired(false);
+               .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.IsHiperlordose)
                .HasColumnName("Hiperlordose")
-               .HasColumnType("TINYINT(1)")
-               .IsRequired(false);
+               .HasColumnType("TINYINT(1)");
         }
     }
 }

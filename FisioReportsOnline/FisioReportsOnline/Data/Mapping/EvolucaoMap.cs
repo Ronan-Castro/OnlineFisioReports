@@ -26,8 +26,7 @@ namespace FisioReportsOnline.Data.Mapping
 
             builder.Property(x => x.DataAtividade)
                 .HasColumnName("DataAtividade")
-                .HasColumnType("DATETIME")
-                .IsRequired(false);
+                .HasColumnType("DATETIME");
 
             builder.Property(x => x.Aparelho)
                 .HasColumnName("Aparelho")

@@ -25,23 +25,19 @@ namespace FisioReportsOnline.Data.Mapping
 
             builder.Property(x => x.Equilibrio)
                .HasColumnName("Equilibrio")
-               .HasColumnType("TINYINT(1)")
-               .IsRequired(false);
+               .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.FroxidaoLigamentar)
                 .HasColumnName("FroxidaoLigamentar")
-                .HasColumnType("TINYINT(1)")
-                .IsRequired(false);
+                .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.EstabilidadeEscapular)
                 .HasColumnName("EstabilidadeEscapular")
-                .HasColumnType("TINYINT(1)")
-                .IsRequired(false);
+                .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.MobilidadeColuna)
                 .HasColumnName("MobilidadeColuna")
-                .HasColumnType("TINYINT(1)")
-                .IsRequired(false);
+                .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.PadraoMovimento)
             .HasColumnName("PadraoMovimento")

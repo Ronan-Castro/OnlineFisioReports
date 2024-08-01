@@ -26,6 +26,16 @@ namespace FisioReportsOnline.Data
             base.OnModelCreating(builder);
 
             // Aplicar a configuração da entidade ApplicationUser
+            builder.ApplyConfiguration(new AvaliacaoMap());
+            builder.ApplyConfiguration(new ColunaMap());
+            builder.ApplyConfiguration(new DoencasCondicoesMap());
+            builder.ApplyConfiguration(new EnderecoMap());
+            builder.ApplyConfiguration(new EvolucaoMap());
+            builder.ApplyConfiguration(new ExameFisicoMap());
+            builder.ApplyConfiguration(new HabitosVidaMap());
+            builder.ApplyConfiguration(new OmbrosMap());
+            builder.ApplyConfiguration(new PacienteMap());
+            builder.ApplyConfiguration(new PelveMap());
             builder.ApplyConfiguration(new UsuarioMap());
         }
 

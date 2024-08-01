@@ -37,8 +37,7 @@ namespace FisioReportsOnline.Data.Mapping
 
             builder.Property(x => x.DataNascimento)
                 .HasColumnName("DataNascimento")
-                .HasColumnType("DATETIME")
-                .IsRequired(false);
+                .HasColumnType("DATETIME");
 
             builder.Property(x => x.Email)
                 .HasColumnName("Email")
@@ -52,18 +51,15 @@ namespace FisioReportsOnline.Data.Mapping
 
             builder.Property(x => x.DataUltimaAvaliacao)
                 .HasColumnName("DataUltimaAvaliacao")
-                .HasColumnType("DATETIME")
-                .IsRequired(false);
+                .HasColumnType("DATETIME");
 
             builder.Property(x => x.DataUltimaAtividade)
                 .HasColumnName("DataUltimaAtividade")
-                .HasColumnType("DATETIME")
-                .IsRequired(false);
+                .HasColumnType("DATETIME");
 
             builder.Property(x => x.Sexo)
                 .HasColumnName("Sexo")
-                .HasColumnType("TINYINT")
-                .IsRequired(false);
+                .HasColumnType("TINYINT");
 
             //Relações de um para muitos
             builder

@@ -21,24 +21,20 @@ namespace FisioReportsOnline.Data.Mapping
 
             builder.Property(x => x.IsNormal)
                .HasColumnName("Normal")
-               .HasColumnType("TINYINT(1)")
-               .IsRequired(false);
+               .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.IsAnteriorizada)
                .HasColumnName("Anteriorizada")
-               .HasColumnType("TINYINT(1)")
-               .IsRequired(false);
+               .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.LadoElevado)
                .HasColumnName("LadoElevado")
                .HasColumnType("TINYINT")
-               .HasAnnotation("MySql:Comment", "0 - Elevado Direito e 1 - Elevado Esquerdo")
-               .IsRequired(false);
+               .HasAnnotation("MySql:Comment", "0 - Elevado Direito e 1 - Elevado Esquerdo");
 
             builder.Property(x => x.IsEscapulaAlada)
                .HasColumnName("EscapulaAlada")
-               .HasColumnType("TINYINT(1)")
-               .IsRequired(false);
+               .HasColumnType("TINYINT(1)");
         }
     }
 }

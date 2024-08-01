@@ -56,8 +56,7 @@ namespace FisioReportsOnline.Data.Mapping
 
             builder.Property(x => x.DataAtendimento)
                 .HasColumnName("DataAtendimento")
-                .HasColumnType("TEXT")
-                .IsRequired(false);
+                .HasColumnType("TEXT");
 
             //Índices
 

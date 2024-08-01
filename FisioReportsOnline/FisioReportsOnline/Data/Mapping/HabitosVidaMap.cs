@@ -24,38 +24,31 @@ namespace FisioReportsOnline.Data.Mapping
 
             builder.Property(x => x.Tabagismo)
                 .HasColumnName("Tabagismo")
-                .HasColumnType("TINYINT(1)")
-                .IsRequired(false);
+                .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.Etilismo)
                 .HasColumnName("Etilismo")
-                .HasColumnType("TINYINT(1)")
-                .IsRequired(false);
+                .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.IngereAgua)
                 .HasColumnName("IngereAgua")
-                .HasColumnType("TINYINT(1)")
-                .IsRequired(false);
+                .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.Medicacao)
                 .HasColumnName("Medicacao")
-                .HasColumnType("TINYINT(1)")
-                .IsRequired(false);
+                .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.Intestino)
                 .HasColumnName("Intestino")
-                .HasColumnType("TINYINT(1)")
-                .IsRequired(false);
+                .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.AtivFisica)
                 .HasColumnName("AtivFisica")
-                .HasColumnType("TINYINT(1)")
-                .IsRequired(false);
+                .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.Pilates)
                 .HasColumnName("Pilates")
-                .HasColumnType("TINYINT(1)")
-                .IsRequired(false);
+                .HasColumnType("TINYINT(1)");
 
             builder.Property(x => x.ObsHabitos)
                 .HasColumnName("ObsHabitos")
