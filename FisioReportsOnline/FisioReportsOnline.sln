@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FisioOnlineReports", "FisioOnlineReports\FisioOnlineReports\FisioOnlineReports.csproj", "{007D13D2-E589-4950-AF72-3AE40CEC66B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FisioOnlineReports", "FisioOnlineReports\FisioOnlineReports\FisioOnlineReports.csproj", "{007D13D2-E589-4950-AF72-3AE40CEC66B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FisioOnlineReports.Client", "FisioOnlineReports\FisioOnlineReports.Client\FisioOnlineReports.Client.csproj", "{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FisioOnlineReports.Client", "FisioOnlineReports\FisioOnlineReports.Client\FisioOnlineReports.Client.csproj", "{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibFisioOnline", "..\..\LibFisioOnline\LibFisioOnline\LibFisioOnline.csproj", "{584D3F0F-D23D-4240-931B-AB26D88C5326}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{584D3F0F-D23D-4240-931B-AB26D88C5326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{584D3F0F-D23D-4240-931B-AB26D88C5326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{584D3F0F-D23D-4240-931B-AB26D88C5326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{584D3F0F-D23D-4240-931B-AB26D88C5326}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
