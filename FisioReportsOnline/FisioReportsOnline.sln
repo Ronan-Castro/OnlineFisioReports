@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FisioOnlineReports", "FisioOnlineReports\FisioOnlineReports\FisioOnlineReports.csproj", "{007D13D2-E589-4950-AF72-3AE40CEC66B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FisioOnlineReports.Client", "FisioOnlineReports\FisioOnlineReports.Client\FisioOnlineReports.Client.csproj", "{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{007D13D2-E589-4950-AF72-3AE40CEC66B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{007D13D2-E589-4950-AF72-3AE40CEC66B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{007D13D2-E589-4950-AF72-3AE40CEC66B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{007D13D2-E589-4950-AF72-3AE40CEC66B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9365EB02-B795-4ADD-A8BD-AE89964EFB93}
+	EndGlobalSection
+EndGlobal
