@@ -8,6 +8,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\LibFisioOnline\LibFisioOnline.csproj" />
     <ProjectReference Include="..\FisioOnlineReports.Client\FisioOnlineReports.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.*" />
   </ItemGroup>
