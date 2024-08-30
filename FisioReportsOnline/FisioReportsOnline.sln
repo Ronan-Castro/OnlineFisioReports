@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FisioOnlineReports", "Fisio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FisioOnlineReports.Client", "FisioOnlineReports\FisioOnlineReports.Client\FisioOnlineReports.Client.csproj", "{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibFisioOnline", "..\..\LibFisioOnline\LibFisioOnline\LibFisioOnline.csproj", "{584D3F0F-D23D-4240-931B-AB26D88C5326}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibFisioOnline", "..\..\LibFisioOnline\LibFisioOnline.csproj", "{734D2ABC-A84A-488B-B961-D5A1BEA93464}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0C97F90-CE60-4B81-9CAB-6FD4374BC30B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{584D3F0F-D23D-4240-931B-AB26D88C5326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{584D3F0F-D23D-4240-931B-AB26D88C5326}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{584D3F0F-D23D-4240-931B-AB26D88C5326}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{584D3F0F-D23D-4240-931B-AB26D88C5326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{734D2ABC-A84A-488B-B961-D5A1BEA93464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{734D2ABC-A84A-488B-B961-D5A1BEA93464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{734D2ABC-A84A-488B-B961-D5A1BEA93464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{734D2ABC-A84A-488B-B961-D5A1BEA93464}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

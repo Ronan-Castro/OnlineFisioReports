@@ -1,10 +1,103 @@
 ﻿@page "/agenda"
 @using Heron.MudCalendar
+@using LibFisioOnline.Models
 
 <h3>Agendamento</h3>
 
-<MudCalendar/>
+<MudCalendar Items="_itens" EnableDragItems="true" EnableResizeItems="true" ItemChanged="ItemChanged" CellClicked="CellClicked" ItemClicked="ItemClicked" DayTimeInterval="CalendarTimeInterval.Minutes15">
+    <ToolbarContent>
+
+        @*Botão para adicionar novo atendimento*@
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mx-1" OnClick="AdicionarAtendimento">Agendar Atendimento</MudButton>
+
+
+        @*Definição dos Ambientes disponíveis*@
+        <MudSelect Class="px-1" @bind-Value="stringValue" SelectedValuesChanged="SelectChangedValue" AdornmentIcon="@Icons.Material.Filled.Workspaces" AdornmentColor="Color.Primary" T="string" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined">
+            <MudSelectItem Value="@("Sala 1")" />
+            <MudSelectItem Value="@("Sala 2")" />
+            <MudSelectItem Value="@("Sala 3")" />
+        </MudSelect>
+    </ToolbarContent>
+    @*Definição dos campos do Calendário*@
+    <CellTemplate>
+        <div style="width: 100%; height: 100%; border: 2px solid @GetColor(((CustomItem)context).Color); border-radius: 10px;">
+            <div style="background-color: @GetColor(((CustomItem)context).Color)"><MudText Style="color: #ffffff;" Typo="Typo.body1" Align="Align.Center">@(((CustomItem)context).Atendimento.Paciente.Nome)</MudText></div>
+            <div class="pa-1"><MudText Typo="Typo.body2">Profissional: @(((CustomItem)context).Atendimento.ProfissionalSaude.Nome)</MudText></div>
+            <div class="pa-1"><MudText Typo="Typo.body2">Atividade: @(((CustomItem)context).Atendimento.ObsProcedimentos)</MudText></div>
+        </div>
+    </CellTemplate>
+
+</MudCalendar>
+
+<MudMessageBox @ref="_mudMessageBox" Title="Warning" CancelText="Cancel">
+    <MessageContent>
+        Deleting can <b><i>not</i></b> be undone!
+    </MessageContent>
+    <YesButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Delete!</MudButton>
+    </YesButton>
+</MudMessageBox>
+
 
 @code {
+    private string GetColor(Color color) => $"var(--mud-palette-{color.ToDescriptionString()})";
+    private MudMessageBox _mudMessageBox;
+    private List<CustomItem> _itens = new();
+    private List<Ambiente> ambientes = new();
+    private string stringValue { get; set; } = "Sala 1";
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            ambientes = await CarregarAmbientes();
+            _itens = await CarregarAtendimentos(ambientes.First());
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async Task<List<Ambiente>>  CarregarAmbientes()
+    {
+        return null;
+    }
+
+
+    private async Task<List<CustomItem>> CarregarAtendimentos(Ambiente ambiente)
+    {
+        return null;
+    }
+
+
+    private async Task SelectChangedValue()
+    {
+        var a = stringValue;
+    }
+
+    private async Task ItemChanged(CalendarItem context)
+    {
+        await DialogService.ShowMessageBox("Item Modified", context.Text);
+    }
+
+    private async Task CellClicked(DateTime dateTime)
+    {
+        await DialogService.ShowMessageBox("Cell Clicked", dateTime.ToString(Thread.CurrentThread.CurrentCulture));
+    }
+
+    private async Task ItemClicked(CalendarItem context)
+    {
+        await DialogService.ShowMessageBox("Item Clicked", context.Text);
+    }
+
+    private void AdicionarAtendimento()
+    {
+
+    }
+
+    private class CustomItem : CalendarItem
+    {
+        public Color Color { get; set; } = Color.Primary;
+        public Atendimento Atendimento { get; set; } = new();
+    }
 }
