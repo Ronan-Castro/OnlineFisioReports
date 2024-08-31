@@ -7,16 +7,19 @@ namespace FisioOnlineReports.EndPoints
 
         // URLS GET
 
-        public static string urlBase { get; set; } = $"";
+        public static string urlBase { get; set; } = $"https://localhost:7142";
 
         public static string UrlBase()
         {
             return urlBase;
         }
-
-        internal static string ConsultarAmbiente()
+        public static string ConsultarAmbiente()
         {
             return $"/v1/ambientes";
+        }
+        public static string ConsultarAtendimento()
+        {
+            return $"/v1/atendimentos";
         }
     }
 }

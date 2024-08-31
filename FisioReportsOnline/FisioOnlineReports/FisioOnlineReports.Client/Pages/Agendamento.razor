@@ -1,8 +1,8 @@
 ﻿@page "/agenda"
+@using FisioOnlineReports.Client.Service
 @using FisioOnlineReports.Service
 @using Heron.MudCalendar
 @using LibFisioOnline.Models
-@inject AmbienteService _AmbienteService
 
 <h3>Agendamento</h3>
 
@@ -15,9 +15,11 @@
 
         @*Definição dos Ambientes disponíveis*@
         <MudSelect Class="px-1" @bind-Value="stringValue" SelectedValuesChanged="SelectChangedValue" AdornmentIcon="@Icons.Material.Filled.Workspaces" AdornmentColor="Color.Primary" T="string" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined">
-            <MudSelectItem Value="@("Sala 1")" />
-            <MudSelectItem Value="@("Sala 2")" />
-            <MudSelectItem Value="@("Sala 3")" />
+            @foreach (var item in _ambientes)
+            {
+                <MudSelectItem Value="@(item.Nome)" />
+            }
+
         </MudSelect>
     </ToolbarContent>
     @*Definição dos campos do Calendário*@
@@ -49,7 +51,7 @@
     private string GetColor(Color color) => $"var(--mud-palette-{color.ToDescriptionString()})";
     private MudMessageBox _mudMessageBox;
     private List<CustomItem> _itens = new();
-    private List<Ambiente> ambientes = new();
+    private List<Ambiente> _ambientes = new();
     private string stringValue { get; set; } = "Sala 1";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -58,27 +60,46 @@
 
         if (firstRender)
         {
-            ambientes = await CarregarAmbientes();
-            _itens = await CarregarAtendimentos(ambientes.First());
-            await InvokeAsync(StateHasChanged);
+            _ambientes = await CarregarAmbientes();
+            if (_ambientes.Any())
+            {
+                stringValue = _ambientes.First().Nome;
+                _itens = await CarregarAtendimentos(_ambientes.First());
+                await InvokeAsync(StateHasChanged);
+            }
         }
     }
 
     private async Task<List<Ambiente>>  CarregarAmbientes()
     {
+        AmbienteService _AmbienteService = new();
         return await _AmbienteService.ConsultarAmbiente();
     }
 
 
     private async Task<List<CustomItem>> CarregarAtendimentos(Ambiente ambiente)
     {
-        return null;
+        AtendimentoService _AtendimentoService = new();
+        var listaAtendimentos = await _AtendimentoService.ConsultarAtendimento();
+
+        List<CustomItem> customItems = new();
+
+        foreach(var item in listaAtendimentos)
+        {
+            CustomItem novoAtendimento = new();
+            novoAtendimento.Atendimento = item;
+            customItems.Add(novoAtendimento);
+        }
+        return customItems;
     }
 
 
     private async Task SelectChangedValue()
     {
-        var a = stringValue;
+        if (_ambientes.Any())
+        {
+            await CarregarAtendimentos(_ambientes.First(c => c.Nome == "stringValue"));
+        }
     }
 
     private async Task ItemChanged(CalendarItem context)

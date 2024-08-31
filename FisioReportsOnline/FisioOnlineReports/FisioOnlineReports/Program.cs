@@ -1,5 +1,6 @@
 using FisioOnlineReports.Client.Pages;
 using FisioOnlineReports.Components;
+using FisioOnlineReports.Service;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
