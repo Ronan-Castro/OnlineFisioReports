@@ -1,5 +1,6 @@
 ﻿
 
+
 namespace FisioOnlineReports.EndPoints
 {
     public static class ApiFisio
@@ -13,13 +14,18 @@ namespace FisioOnlineReports.EndPoints
         {
             return urlBase;
         }
-        public static string ConsultarAmbiente()
+        public static string Ambientes()
         {
             return $"/v1/ambientes";
         }
-        public static string ConsultarAtendimento()
+        public static string Atendimentos()
         {
             return $"/v1/atendimentos";
+        }
+
+        public static string Pacientes()
+        {
+            return $"/v1/pacientes";
         }
     }
 }

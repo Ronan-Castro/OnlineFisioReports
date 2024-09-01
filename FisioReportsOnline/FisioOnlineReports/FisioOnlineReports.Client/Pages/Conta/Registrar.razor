@@ -1,0 +1,50 @@
+﻿@page "/registrar"
+<h3>Registrar</h3>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" sm="8">
+        <MudPaper Class="pa-4">
+            <MudForm Spacing="5">
+
+                <div class="d-flex justify-center">
+                    <MudImage Src="/images/IconeClinicSealWise.png" Alt="Icone" Class="rounded-lg" Height="150" Width="150"></MudImage>
+                </div>
+                <div class="d-flex justify-center">
+                    <MudText Typo="Typo.h3">Registre sua Empresa</MudText>
+                </div>
+                <MudTextField T="string" Label="Nome da Empresa" Variant="Variant.Outlined" 
+                            AdornmentIcon="@Icons.Material.Filled.Business" Adornment="Adornment.Start"
+                              AdornmentColor="Color.Primary" Margin="Margin.Dense" />
+                
+                <MudTextField T="string" Label="Cnpj" Variant="Variant.Outlined"
+                            Mask="@(new PatternMask("00.000.000/0000-00"))" Adornment="Adornment.Start"
+                              AdornmentText="Cnpj" AdornmentColor="Color.Primary" Margin="Margin.Dense" />
+                
+                <MudTextField T="string" Label="Endereço" Variant="Variant.Outlined"
+                            AdornmentIcon="@Icons.Material.Filled.LocationOn" Adornment="Adornment.Start"
+                              AdornmentColor="Color.Primary" Margin="Margin.Dense" />
+               
+                <MudTextField T="string" Label="Telefone Celular" Variant="Variant.Outlined" 
+                            InputType="InputType.Telephone" Mask="@(new PatternMask("(00) 0 0000-0000"))"
+                            AdornmentIcon="@Icons.Material.Filled.Smartphone" Adornment="Adornment.Start"
+                              AdornmentColor="Color.Primary" Margin="Margin.Dense" />
+                
+                <MudTextField T="string" Label="Email" Variant="Variant.Outlined" 
+                            InputType="InputType.Email" AdornmentIcon="@Icons.Material.Filled.Email"
+                              Adornment="Adornment.Start" AdornmentColor="Color.Primary" Margin="Margin.Dense" />
+
+            </MudForm>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<style>
+    .mud-input,
+    .mud-input-control > .mud-input-control-input-container > .mud-input-label-inputcontrol {
+        font-size: 1.5rem; /* 1 rem is default */
+    }
+</style>
+
+@code {
+
+}

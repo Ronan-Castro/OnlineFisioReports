@@ -1,0 +1,34 @@
+﻿@page "/login"
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="6" sm="6">
+        <MudPaper Class="pa-4">
+            <MudForm Spacing="5">
+                <div class="d-flex justify-center">
+                    <MudImage Src="/images/IconeClinicSealWise.png" Alt="Icone" Class="rounded-lg" Height="150" Width="150"></MudImage>
+                </div>
+                <div class="d-flex justify-center">
+                    <MudText Typo="Typo.h4">Faça Login em sua Conta</MudText>
+                </div>
+                <MudTextField T="string" Label="Usuário" AdornmentIcon="@Icons.Material.Filled.Person"
+                              Adornment="Adornment.Start" AdornmentColor="Color.Primary" Variant="Variant.Outlined" 
+                              Margin="Margin.Dense" />
+
+                <MudTextField T="string" Label="Senha" InputType="InputType.Password" 
+                        AdornmentIcon="@Icons.Material.Filled.Password" Adornment="Adornment.Start"
+                              Variant="Variant.Outlined" AdornmentColor="Color.Primary" Margin="Margin.Dense" />
+            </MudForm>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<style>
+    .mud-input,
+    .mud-input-control > .mud-input-control-input-container > .mud-input-label-inputcontrol {
+        font-size: 1.5rem; /* 1 rem is default */
+    }
+</style>
+
+@code {
+
+}

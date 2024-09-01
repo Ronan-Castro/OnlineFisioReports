@@ -15,7 +15,7 @@ namespace FisioOnlineReports.Client.Service
             {
                 var http = new HttpRequester();
 
-                var (JsonResposta, CodigoResposta) = await http.SendGetRequestAsync(ApiFisio.ConsultarAtendimento());
+                var (JsonResposta, CodigoResposta) = await http.SendGetRequestAsync(ApiFisio.Atendimentos());
 
                 if (CodigoResposta.IsSuccessStatusCode)
                 {
