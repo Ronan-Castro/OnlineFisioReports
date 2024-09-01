@@ -27,5 +27,9 @@ namespace FisioOnlineReports.EndPoints
         {
             return $"/v1/pacientes";
         }
+        public static string PacienteId(int id)
+        {
+            return $"/v1/pacientes/{id}";
+        }
     }
 }

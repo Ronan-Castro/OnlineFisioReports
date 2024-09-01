@@ -1,4 +1,4 @@
-﻿@page "/pacientes/criar"
+﻿@page "/pacientes/editar/{PacienteId:int}"
 @using FisioOnlineReports.Client.Service
 @using LibFisioOnline.Models
 <h3>CriarPaciente</h3>
@@ -57,8 +57,7 @@
                 @*Definição dos Ambientes disponíveis*@
                 @if (InputModel.ComoConheceu == ComoConheceu.Indicacao && _pacientes != null)
                 {
-                    <MudSelect Class="py-3" @bind-Value="idPacienteIndicou" AdornmentIcon="@Icons.Material.Filled.Workspaces" AdornmentColor="Color.Primary"
-                        T="int" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined">
+                    <MudSelect Class="py-3" @bind-Value="idPacienteIndicou" AdornmentIcon="@Icons.Material.Filled.Workspaces" AdornmentColor="Color.Primary" T="int" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined">
                         @foreach (var item in _pacientes)
                         {
                             <MudSelectItem Value="@(item.Id)"></MudSelectItem>
@@ -83,6 +82,10 @@
 </MudGrid>
 
 @code {
+
+    [Parameter]
+    public int PacienteId { get; set; }
+    
     public PacienteInputModel InputModel { get; set; } = new();
     public DateTime? DataNascimento { get; set; } = DateTime.Today;
     public DateTime? MaxDate { get; set; } = DateTime.Today;
@@ -95,8 +98,15 @@
 
         if (firstRender)
         {
+            Paciente pacienteEditando = await CarregarPacienteEdicao();
             _pacientes = await CarregarPacientes();
         }
+    }
+
+    public async Task<Paciente> CarregarPacienteEdicao()
+    {
+        PacienteService _PacienteService = new();
+        return await _PacienteService.ConsultarPaciente(PacienteId);
     }
 
     public async Task OnValidSubmitAsync()

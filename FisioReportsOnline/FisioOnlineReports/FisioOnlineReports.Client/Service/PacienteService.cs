@@ -35,6 +35,59 @@ namespace FisioOnlineReports.Client.Service
                 return null;
             }
         }
+
+        public async Task<Paciente> ConsultarPaciente(int id)
+        {
+            try
+            {
+                var http = new HttpRequester();
+
+                var (JsonResposta, CodigoResposta) = await http.SendGetRequestAsync(ApiFisio.PacienteId(id));
+
+                if (CodigoResposta.IsSuccessStatusCode)
+                {
+                    var apiResponse = JsonConvert.DeserializeObject<ApiResponse<Paciente>>(JsonResposta);
+                    if (apiResponse != null)
+                        return apiResponse.data;
+                }
+
+                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Ambiente");
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                LogErro.SetLog(ex, "Throw ConsultarAmbiente");
+                return null;
+            }
+        }
+
+        public async Task<Paciente> DeletePaciente(int id)
+        {
+            try
+            {
+                var http = new HttpRequester();
+
+                var (JsonResposta, CodigoResposta) = await http.SendDeleteRequestAsync(ApiFisio.PacienteId(id));
+
+                if (CodigoResposta.IsSuccessStatusCode)
+                {
+                    var apiResponse = JsonConvert.DeserializeObject<ApiResponse<Paciente>>(JsonResposta);
+                    if (apiResponse != null)
+                        return apiResponse.data;
+                }
+
+                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Ambiente");
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                LogErro.SetLog(ex, "Throw ConsultarAmbiente");
+                return null;
+            }
+        }
+
         public async Task<Paciente> InserirPaciente(PacienteInputModel pacienteInputModel)
         {
             try
