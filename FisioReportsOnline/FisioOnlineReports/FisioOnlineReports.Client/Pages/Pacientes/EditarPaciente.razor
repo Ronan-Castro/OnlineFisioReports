@@ -1,7 +1,4 @@
 ﻿@page "/pacientes/editar/{PacienteId:int}"
-@using FisioOnlineReports.Client.Service
-@using LibFisioOnline.Models
-<h3>CriarPaciente</h3>
 
 <MudGrid Justify="Justify.Center"> 
     <MudItem xs="12" sm="8"> 
@@ -115,7 +112,7 @@
             InputModel.DataNascimento = (DateTime) DataNascimento;
 
         PacienteService _PacienteService = new();
-        await _PacienteService.InserirPaciente(InputModel);
+        await _PacienteService.AtualizarPaciente(InputModel);
     }
 
     public async Task<List<Paciente>> CarregarPacientes()

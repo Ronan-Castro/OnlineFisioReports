@@ -1,0 +1,139 @@
+﻿@page "/usuarios/editar/{UsuarioId:int}"
+<h3>CriarPaciente</h3>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" sm="8">
+        <MudPaper Class="pa-8 mt-4">
+
+            <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+                <DataAnnotationsValidator />
+
+                <MudTextField Label="Nome"
+                              Variant="Variant.Outlined"
+                              HelperText="Campo obrigatório"
+                              @bind-Value="InputModel.Nome"
+                              For="@(()=> InputModel.Nome)" />
+
+                <MudTextField Label="Documento"
+                              Variant="Variant.Outlined"
+                              HelperText="Campo obrigatório"
+                              @bind-Value="InputModel.Documento"
+                              Mask="@(new PatternMask("000.000.000-00"))"
+                              For="@(()=> InputModel.Documento)" />
+
+                <MudTextField Label="E-mail"
+                              Variant="Variant.Outlined"
+                              HelperText="Campo obrigatório"
+                              @bind-Value="InputModel.Email"
+                              For="@(()=> InputModel.Email)" />
+
+                <MudTextField Label="Celular"
+                              Variant="Variant.Outlined"
+                              HelperText="Campo obrigatório"
+                              @bind-Value="InputModel.Celular"
+                              Mask="@(new PatternMask("(00) 0 0000-0000"))"
+                              For="@(()=> InputModel.Celular)" />
+
+                <MudDatePicker Label="Data de Nascimento"
+                               Editable="false"
+                               @bind-Date="DataNascimento"
+                               Variant="Variant.Outlined"
+                               MaxDate="@MaxDate"
+                               Placeholder="Data de Nascimento" />
+
+                <MudCheckBox @bind-Value="InputModel.IsGerente" Color="Color.Primary">Gerente</MudCheckBox>
+
+                <MudCheckBox @bind-Value="InputModel.IsProfissionalSaude" Color="Color.Primary">Profissional de Saúde</MudCheckBox>
+                @if (InputModel.IsProfissionalSaude)
+                {
+                    @if (_especialidades != null)
+                    {
+                        <MudSelect Class="py-3" @bind-Value="idPacienteIndicou" AdornmentIcon="@Icons.Material.Filled.Workspaces" AdornmentColor="Color.Primary"
+                                   T="int" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined">
+                            @foreach (var item in _especialidades)
+                            {
+                                <MudSelectItem Value="@(item.Id)">@item.Nome</MudSelectItem>
+                            }
+                        </MudSelect>
+
+                        <MudTextField Label="Documento de Saúde"
+                                      Variant="Variant.Outlined"
+                                      @bind-Value="InputModel.DocumentoProfissional" />
+
+                        <MudSelect Class="py-3" @bind-Value="InputModel.TipoProfissional" AdornmentIcon="@Icons.Material.Filled.Workspaces" AdornmentColor="Color.Primary"
+                                   T="TipoProfissional" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined">
+                            @foreach (var tipo in Enum.GetValues(typeof(TipoProfissional)).Cast<TipoProfissional>())
+                            {
+                                <MudSelectItem Value="@tipo">@tipo.ToString()</MudSelectItem>
+                            }
+                        </MudSelect>
+
+                    }
+                    else
+                    {
+                        <MudText Typo="Typo.body1" Class="px-3" Color="Color.Warning">Cadastre especialidades para cadastrar este usuário como Profissional de Saúde</MudText>
+                    }
+                }
+
+                <MudCheckBox @bind-Value="InputModel.IsAtendente" Color="Color.Primary">Atendente</MudCheckBox>
+
+                <MudDivider Class="m-4" />
+
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.Save"
+                           Color="Color.Info"
+                           Size="Size.Large"
+                           ButtonType="ButtonType.Submit">
+                    SALVAR
+                </MudButton>
+
+            </EditForm>
+
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+
+    [Parameter]
+    public int UsuarioId { get; set; }
+    
+    public AtendimentoInputModel { get; set; } = new();
+    public DateTime? DataNascimento { get; set; } = DateTime.Today;
+    public DateTime? MaxDate { get; set; } = DateTime.Today;
+    private List<Usuario> _usuarios = new();
+    private List<Especialidade> _especialidades = new();
+    private int idPacienteIndicou;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            Usuario usuarioEditando = await CarregarUsuario();
+            _especialidades = await CarregarEspecialidades();
+        }
+    }
+
+    public async Task<Usuario> CarregarUsuario()
+    {
+        UsuarioService usuarioService = new();
+        return await usuarioService.ConsultarUsuario(UsuarioId);
+    }
+
+    public async Task OnValidSubmitAsync()
+    {
+        if (DataNascimento != null)
+            InputModel.DataNascimento = (DateTime) DataNascimento;
+
+        UsuarioService usuarioService = new();
+        await usuarioService.AtualizarUsuario(InputModel);
+    }
+
+    public async Task<List<Especialidade>> CarregarEspecialidades()
+    {
+        EspecialidadeService especialidadeService = new();
+        return await especialidadeService.ConsultarEspecialidades();
+    }
+}

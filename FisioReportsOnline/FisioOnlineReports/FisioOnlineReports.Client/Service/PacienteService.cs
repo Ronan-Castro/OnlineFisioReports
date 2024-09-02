@@ -25,13 +25,13 @@ namespace FisioOnlineReports.Client.Service
                         return apiResponse.data;
                 }
 
-                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Ambiente");
+                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Paciente");
 
                 return null;
             }
             catch (Exception ex)
             {
-                LogErro.SetLog(ex, "Throw ConsultarAmbiente");
+                LogErro.SetLog(ex, "Throw ConsultarPaciente");
                 return null;
             }
         }
@@ -51,13 +51,13 @@ namespace FisioOnlineReports.Client.Service
                         return apiResponse.data;
                 }
 
-                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Ambiente");
+                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Paciente");
 
                 return null;
             }
             catch (Exception ex)
             {
-                LogErro.SetLog(ex, "Throw ConsultarAmbiente");
+                LogErro.SetLog(ex, "Throw ConsultarPaciente");
                 return null;
             }
         }
@@ -77,13 +77,13 @@ namespace FisioOnlineReports.Client.Service
                         return apiResponse.data;
                 }
 
-                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Ambiente");
+                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Paciente");
 
                 return null;
             }
             catch (Exception ex)
             {
-                LogErro.SetLog(ex, "Throw ConsultarAmbiente");
+                LogErro.SetLog(ex, "Throw ConsultarPaciente");
                 return null;
             }
         }
@@ -106,13 +106,42 @@ namespace FisioOnlineReports.Client.Service
                         return apiResponse.data;
                 }
 
-                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Ambiente");
+                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Paciente");
 
                 return null;
             }
             catch (Exception ex)
             {
-                LogErro.SetLog(ex, "Throw ConsultarAmbiente");
+                LogErro.SetLog(ex, "Throw ConsultarPaciente");
+                return null;
+            }
+        }
+
+        public async Task<Paciente> AtualizarPaciente(PacienteInputModel pacienteInputModel)
+        {
+            try
+            {
+                var http = new HttpRequester();
+
+                string jsonString = JsonConvert.SerializeObject(pacienteInputModel);
+
+
+                var (JsonResposta, CodigoResposta) = await http.SendPutRequestAsync(ApiFisio.Pacientes(), jsonString);
+
+                if (CodigoResposta.IsSuccessStatusCode)
+                {
+                    var apiResponse = JsonConvert.DeserializeObject<ApiResponse<Paciente>>(JsonResposta);
+                    if (apiResponse != null)
+                        return apiResponse.data;
+                }
+
+                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Paciente");
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                LogErro.SetLog(ex, "Throw ConsultarPaciente");
                 return null;
             }
         }

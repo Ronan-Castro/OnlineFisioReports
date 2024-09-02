@@ -1,6 +1,4 @@
 ﻿@page "/pacientes/criar"
-@using FisioOnlineReports.Client.Service
-@using LibFisioOnline.Models
 <h3>CriarPaciente</h3>
 
 <MudGrid Justify="Justify.Center"> 
@@ -43,6 +41,8 @@
                                MaxDate="@MaxDate"
                                Placeholder="Data de Nascimento" />
 
+                
+
                 <MudSelect Class="py-3" @bind-Value="InputModel.ComoConheceu" AdornmentIcon="@Icons.Material.Filled.Workspaces" AdornmentColor="Color.Primary" T="ComoConheceu" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined">
                     <MudSelectItem Value="@(ComoConheceu.Google)">Google</MudSelectItem>
                     <MudSelectItem Value="@(ComoConheceu.Facebook)">Facebook</MudSelectItem>
@@ -51,7 +51,6 @@
                     <MudSelectItem Value="@(ComoConheceu.Planos)">Planos</MudSelectItem>
                     <MudSelectItem Value="@(ComoConheceu.Convenios)">Convênios</MudSelectItem>
                     <MudSelectItem Value="@(ComoConheceu.Indicacao)">Indicação</MudSelectItem>
-
                 </MudSelect>
 
                 @*Definição dos Ambientes disponíveis*@

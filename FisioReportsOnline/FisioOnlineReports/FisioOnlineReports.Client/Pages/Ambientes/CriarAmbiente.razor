@@ -1,0 +1,39 @@
+﻿<MudGrid Justify="Justify.Center"> 
+    <MudItem xs="12" sm="8"> 
+        <MudPaper Class="pa-8 mt-4">
+
+            <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+                <DataAnnotationsValidator />
+
+                <MudTextField Label="Nome"
+                              Variant="Variant.Outlined"
+                              HelperText="Campo obrigatório"
+                              @bind-Value="InputModel.Nome"
+                              For="@(()=> InputModel.Nome)" />
+
+                <MudDivider Class="m-4" />
+
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.Save"
+                           Color="Color.Info"
+                           Size="Size.Large"
+                           ButtonType="ButtonType.Submit">
+                    SALVAR
+                </MudButton>
+
+            </EditForm>
+
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    public AmbienteInputModel InputModel { get; set; } = new();
+
+    public async Task OnValidSubmitAsync()
+    {
+
+        AmbienteService ambienteService = new();
+        await ambienteService.InserirAmbiente(InputModel);
+    }
+}

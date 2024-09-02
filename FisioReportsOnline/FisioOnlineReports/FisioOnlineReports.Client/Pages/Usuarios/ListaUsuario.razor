@@ -1,4 +1,4 @@
-﻿@page "/pacientes"
+﻿@page "/usuarios"
 
 
 <MudText Typo="Typo.h3">Pacientes</MudText>
@@ -10,13 +10,13 @@
            Href="/pacientes/create"
            Class="mt-md-4 mb-4">Novo Paciente</MudButton>
 
-<MudDataGrid Items="@Pacientes" Filterable="false" SortMode="@SortMode.Single" Groupable="false">
+<MudDataGrid Items="@Usuarios" Filterable="false" SortMode="@SortMode.Single" Groupable="false">
     <Columns>
         <PropertyColumn Property="x=>x.Nome" />
-        <PropertyColumn Property="x=>x.Documento" />
         <PropertyColumn Property="x=>x.Email" />
         <PropertyColumn Property="x=>x.Celular" />
         <PropertyColumn Property="x=>x.DataNascimento" Format="dd/MM/yyyy" />
+        <PropertyColumn Property="x=>x.DataCadastro" Format="dd/MM/yyyy" />
         <TemplateColumn>
             <CellTemplate>
                 <MudStack Row>
@@ -30,7 +30,7 @@
                     <MudFab Size="Size.Small"
                             Label="Excluir"
                             hidden="@HideButtons"
-                            @onclick="@(()=> DeletePaciente(context.Item))"
+                            @onclick="@(()=> DeleteUsuario(context.Item))"
                             StartIcon="@Icons.Material.Filled.Delete"
                             Color="Color.Error" />
                 </MudStack>
@@ -40,8 +40,7 @@
 </MudDataGrid>
 
 @code {
-
-    private List<Paciente> Pacientes { get; set; }
+    private List<Usuario> Usuarios { get; set; }
     private bool HideButtons = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -50,29 +49,29 @@
 
         if (firstRender)
         {
-            Pacientes = await CarregarPacientes();
+            Usuarios = await CarregarUsuarios();
         }
     }
 
-    private async Task<List<Paciente>> CarregarPacientes()
+    private async Task<List<Usuario>> CarregarUsuarios()
     {
 
-        PacienteService pacienteService = new();
-        return await pacienteService.ConsultarPacientes();
+        UsuarioService usuarioService = new();
+        return await usuarioService.ConsultarUsuarios();
     }
 
-    private async void DeletePaciente(Paciente paciente)
+    private async void DeleteUsuario(Usuario usuario)
     {
-        PacienteService pacienteService = new();
-        await pacienteService.DeletePaciente(paciente.Id);
+        UsuarioService usuarioService = new();
+        await usuarioService.DeleteUsuario(usuario.Id);
 
-        await CarregarPacientes();
+        Usuarios = await CarregarUsuarios();
 
         StateHasChanged();
     }
 
-    private void GoToUpdate(int pacienteId)
+    private void GoToUpdate(int usuarioId)
     {
-        Navigation.NavigateTo($"/pacientes/editar/{pacienteId}");
+        Navigation.NavigateTo($"/usuarios/editar/{usuarioId}");
     }
 }

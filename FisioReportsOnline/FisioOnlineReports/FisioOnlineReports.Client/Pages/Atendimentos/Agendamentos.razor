@@ -1,8 +1,5 @@
 ﻿@page "/agenda"
-@using FisioOnlineReports.Client.Service
-@using FisioOnlineReports.Service
 @using Heron.MudCalendar
-@using LibFisioOnline.Models
 
 <h3>Agendamento</h3>
 
@@ -76,7 +73,7 @@
     private async Task<List<Ambiente>>  CarregarAmbientes()
     {
         AmbienteService _AmbienteService = new();
-        return await _AmbienteService.ConsultarAmbiente();
+        return await _AmbienteService.ConsultarAmbientes();
     }
 
 
