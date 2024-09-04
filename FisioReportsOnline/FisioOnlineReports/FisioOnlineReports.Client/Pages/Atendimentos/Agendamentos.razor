@@ -8,6 +8,7 @@
 
         @*Botão para adicionar novo atendimento*@
         <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mx-1" OnClick="AdicionarAtendimento">Agendar Atendimento</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mx-1" OnClick="AdicionarIndisponibilidade">Agendar Indisponibilidade</MudButton>
 
 
         @*Definição dos Ambientes disponíveis*@
@@ -24,15 +25,33 @@
     </ToolbarContent>
     @*Definição dos campos do Calendário*@
     <CellTemplate>
-        <div style="width: 100%; height: 100%; border: 2px solid @GetColor(((CustomItem)context).Color); border-radius: 10px;">
-            <div style="background-color: @GetColor(((CustomItem)context).Color)">
-                <MudText Style="color: #ffffff;" Typo="Typo.body1" Align="Align.Center">
-                    @(((CustomItem)context).Atendimento.Paciente.Nome)
-                </MudText>
+        @if ((((CustomItem)context).Atendimento) != null)
+        {
+            <div style="width: 100%; height: 100%; border: 2px solid @GetColor(((CustomItem)context).Color); border-radius: 10px;">
+                <div style="background-color: @GetColor(((CustomItem)context).Color)">
+                    <MudText Style="color: #ffffff;" Typo="Typo.body1" Align="Align.Center">
+                        @(((CustomItem)context).Atendimento.Paciente.Nome)
+                    </MudText>
+                </div>
+                <div class="pa-1"><MudText Typo="Typo.body2">Profissional: @(((CustomItem)context).Atendimento.ProfissionalSaude.Nome)</MudText></div>
+                <div class="pa-1"><MudText Typo="Typo.body2">Atividade: @(((CustomItem)context).Atendimento.ObsProcedimentos)</MudText></div>                
             </div>
-            <div class="pa-1"><MudText Typo="Typo.body2">Profissional: @(((CustomItem)context).Atendimento.ProfissionalSaude.Nome)</MudText></div>
-            <div class="pa-1"><MudText Typo="Typo.body2">Atividade: @(((CustomItem)context).Atendimento.ObsProcedimentos)</MudText></div>
-        </div>
+        }
+        else if ((((CustomItem)context).Indisponibilidade) != null)
+        {
+            <div style="width: 100%; height: 100%; border: 2px solid @GetColor(((CustomItem)context).Color); border-radius: 10px;">
+                <div style="background-color: @GetColor(((CustomItem)context).Color)">
+                    <MudText Style="color: #ffffff;" Typo="Typo.body1" Align="Align.Center">
+                        Indisponível
+                    </MudText>
+                </div>
+                <div class="pa-1">
+                    <MudText Typo="Typo.body2">
+                        Motivo: @(((CustomItem)context).Indisponibilidade.Motivo)
+                    </MudText>
+                </div>
+            </div>        
+        }
     </CellTemplate>
 
 </MudCalendar>
@@ -80,25 +99,35 @@
     private async Task<List<CustomItem>> CarregarAtendimentos(Ambiente ambiente)
     {
         AtendimentoService _AtendimentoService = new();
-        var listaAtendimentos = await _AtendimentoService.ConsultarAtendimento();
+        var listaAtendimentos = await _AtendimentoService.ConsultarAtendimento(ambiente.Id);
 
         List<CustomItem> customItems = new();
 
         foreach(var item in listaAtendimentos)
         {
-            CustomItem novoAtendimento = new();
-            novoAtendimento.Atendimento = item;
-            customItems.Add(novoAtendimento);
+            CustomItem novoAgendamento = new();
+            novoAgendamento.Atendimento = item;
+            customItems.Add(novoAgendamento);
         }
+
+        IndisponibilidadeService indisponibilidadeService = new();
+        var listaIndisponibilidade = await indisponibilidadeService.ConsultarIndisponibilidades(ambiente.Id);
+
+        foreach (var item in listaIndisponibilidade)
+        {
+            CustomItem novoAgendamento = new();
+            novoAgendamento.Indisponibilidade = item;
+            customItems.Add(novoAgendamento);
+        }
+
         return customItems;
     }
-
 
     private async Task SelectChangedValue()
     {
         if (_ambientes.Any())
         {
-            await CarregarAtendimentos(_ambientes.First(c => c.Nome == "stringValue"));
+            await CarregarAtendimentos(_ambientes.First(c => c.Nome == stringValue));
         }
     }
 
@@ -120,11 +149,17 @@
     private void AdicionarAtendimento()
     {
 
+    } 
+    
+    private void AdicionarIndisponibilidade()
+    {
+
     }
 
     private class CustomItem : CalendarItem
     {
         public Color Color { get; set; } = Color.Primary;
         public Atendimento Atendimento { get; set; } = new();
+        public Indisponibilidade Indisponibilidade { get; set; } = new();
     }
 }

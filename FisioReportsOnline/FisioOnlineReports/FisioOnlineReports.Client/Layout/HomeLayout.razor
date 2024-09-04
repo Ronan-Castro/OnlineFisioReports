@@ -1,0 +1,27 @@
+﻿@inherits LayoutComponentBase
+
+
+<MudThemeProvider />
+
+<MudLayout>
+    <MudAppBar Color="Color.Primary">
+        <MudImage Src="/images/IconeClinicSealWise.png" Alt="Icone" Class="rounded-lg" Height="50" Width="50"></MudImage>
+        <MudSpacer />
+        <MudButton Color="Color.Inherit" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Login"> Ja sou Cliente</MudButton>
+    </MudAppBar>
+
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+
+    <MudAppBar Fixed="false" Bottom Color="Color.Primary" Style="justify-content:center">
+        <MudSpacer />
+        <MudText>ClinicSealWise</MudText>
+        <MudSpacer />
+    </MudAppBar>
+</MudLayout>
+
+@code
+{
+
+}

@@ -26,6 +26,10 @@ namespace FisioOnlineReports.EndPoints
         {
             return $"/v1/atendimentos";
         }
+        public static string Atendimentos(int ambienteId)
+        {
+            return $"/v1/atendimentos/ambiente/{ambienteId}";
+        }
 
         public static string Pacientes()
         {
@@ -58,6 +62,10 @@ namespace FisioOnlineReports.EndPoints
         public static string IndisponibilidadeId(int id)
         {
             return $"/v1/indisponibilidades/{id}";
+        }
+        public static string Indisponibilidades(int ambienteId)
+        {
+            return $"/v1/indisponibilidades/ambiente/{ambienteId}";
         }
     }
 }

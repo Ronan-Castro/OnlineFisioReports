@@ -64,10 +64,11 @@
     public DateTime? DataFim { get; set; } = DateTime.Today;
     public DateTime? MinDate { get; set; } = DateTime.Today;
 
-    private async Task Close() => await OnClose.InvokeAsync(null);
-
     public IndisponibilidadeInputModel InputModel { get; set; } = new();
+
     private Indisponibilidade Indisponibilidade = new();
+
+    private async Task Close() => await OnClose.InvokeAsync(null);
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

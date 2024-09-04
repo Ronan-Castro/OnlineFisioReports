@@ -10,6 +10,32 @@ namespace FisioOnlineReports.Client.Service
 {
     public class IndisponibilidadeService
     {
+        public async Task<List<Indisponibilidade>> ConsultarIndisponibilidades(int ambienteId)
+        {
+            try
+            {
+                var http = new HttpRequester();
+
+                var (JsonResposta, CodigoResposta) = await http.SendGetRequestAsync(ApiFisio.Indisponibilidades(ambienteId));
+
+                if (CodigoResposta.IsSuccessStatusCode)
+                {
+                    var apiResponse = JsonConvert.DeserializeObject<ApiResponse<List<Indisponibilidade>>>(JsonResposta);
+                    if (apiResponse != null)
+                        return apiResponse.data;
+                }
+
+                LogErro.SetLog(JsonResposta, $"Erro {CodigoResposta} - Consultar Indisponibilidade");
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                LogErro.SetLog(ex, "Throw ConsultarIndisponibilidade");
+                return null;
+            }
+        }
+
         public async Task<List<Indisponibilidade>> ConsultarIndisponibilidades()
         {
             try
