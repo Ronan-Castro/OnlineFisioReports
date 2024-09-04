@@ -1,34 +1,46 @@
-﻿<MudGrid Justify="Justify.Center"> 
-    <MudItem xs="12" sm="8"> 
-        <MudPaper Class="pa-8 mt-4">
+﻿<MudDialog @bind-Visible="Visible">
+    <DialogContent>
+        
+        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+            <DataAnnotationsValidator />
 
-            <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
-                <DataAnnotationsValidator />
+            <MudTextField Label="Nome"
+                            Variant="Variant.Outlined"
+                            HelperText="Campo obrigatório"
+                            @bind-Value="InputModel.Nome"
+                            For="@(()=> InputModel.Nome)" />
 
-                <MudTextField Label="Nome"
-                              Variant="Variant.Outlined"
-                              HelperText="Campo obrigatório"
-                              @bind-Value="InputModel.Nome"
-                              For="@(()=> InputModel.Nome)" />
+            <MudDivider Class="m-4" />
 
-                <MudDivider Class="m-4" />
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Save"
+                       Color="Color.Info"
+                       Size="Size.Large"
+                       ButtonType="ButtonType.Submit">
+                Salvar
+            </MudButton>
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Close"
+                       Color="Color.Info"
+                       Size="Size.Large"
+                       OnClick="Close">
+                       Fechar
+            </MudButton>
 
-                <MudButton Variant="Variant.Filled"
-                           StartIcon="@Icons.Material.Filled.Save"
-                           Color="Color.Info"
-                           Size="Size.Large"
-                           ButtonType="ButtonType.Submit">
-                    SALVAR
-                </MudButton>
-
-            </EditForm>
-
-        </MudPaper>
-    </MudItem>
-</MudGrid>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
 
 @code {
     public AmbienteInputModel InputModel { get; set; } = new();
+
+    [Parameter]
+    public bool Visible { get; set; }
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    private async Task Close() => await OnClose.InvokeAsync(null);
 
     public async Task OnValidSubmitAsync()
     {

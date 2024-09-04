@@ -1,0 +1,97 @@
+﻿<MudDialog @bind-Visible="Visible">
+    <DialogContent>
+
+        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+            <DataAnnotationsValidator />
+
+            <MudTextField Label="Motivo"
+                          Variant="Variant.Outlined"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Motivo"
+                          For="@(()=> InputModel.Motivo)" />
+
+
+            <MudDatePicker Label="Data de Início"
+                           Editable="false"
+                           @bind-Date="DataInicio"
+                           Variant="Variant.Outlined"
+                           MinDate="@MinDate"
+                           Placeholder="Data de Início" />
+
+
+            <MudDatePicker Label="Data de Fim"
+                           Editable="false"
+                           @bind-Date="DataFim"
+                           Variant="Variant.Outlined"
+                           MaxDate="@MinDate"
+                           Placeholder="Data de Fim" />
+
+            <MudDivider Class="m-4" />
+
+
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Save"
+                       Color="Color.Info"
+                       Size="Size.Large"
+                       ButtonType="ButtonType.Submit">
+                Salvar
+            </MudButton>
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Close"
+                       Color="Color.Info"
+                       Size="Size.Large"
+                       OnClick="Close">
+                Fechar
+            </MudButton>
+
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+
+    [Parameter]
+    public int IndisponibilidadeId { get; set; }
+
+    [Parameter]
+    public bool Visible { get; set; }
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+
+    public DateTime? DataInicio { get; set; } = DateTime.Today;
+    public DateTime? DataFim { get; set; } = DateTime.Today;
+    public DateTime? MinDate { get; set; } = DateTime.Today;
+
+    private async Task Close() => await OnClose.InvokeAsync(null);
+
+    public IndisponibilidadeInputModel InputModel { get; set; } = new();
+    private Indisponibilidade Indisponibilidade = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            Indisponibilidade = await CarregarIndisponibilidade();
+            if (Indisponibilidade != null)
+                InputModel.Motivo = Indisponibilidade.Motivo;
+        }
+    }
+
+    public async Task<Indisponibilidade> CarregarIndisponibilidade()
+    {
+        IndisponibilidadeService indisponibilidadeService = new();
+        return await indisponibilidadeService.ConsultarIndisponibilidade(IndisponibilidadeId);
+    }
+
+    public async Task OnValidSubmitAsync()
+    {
+
+        IndisponibilidadeService indisponibilidadeService = new();
+        await indisponibilidadeService.AtualizarIndisponibilidade(InputModel);
+    }
+
+}

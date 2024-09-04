@@ -1,22 +1,18 @@
-﻿@page "/usuarios"
+﻿@page "/especialidades"
 
 
-<MudText Typo="Typo.h3">Pacientes</MudText>
+<MudText Typo="Typo.h3">Especialidades</MudText>
 
 <MudButton Variant="Variant.Filled"
            StartIcon="@Icons.Material.Filled.Add"
            Color="Color.Info"
            Size="Size.Large"
-           Href="/pacientes/create"
-           Class="mt-md-4 mb-4">Novo Paciente</MudButton>
+           @onclick="@(()=> OpenCriar())"
+           Class="mt-md-4 mb-4">Novo Especialidade</MudButton>
 
-<MudDataGrid Items="@Usuarios" Filterable="false" SortMode="@SortMode.Single" Groupable="false">
+<MudDataGrid Items="@Especialidades" Filterable="false" SortMode="@SortMode.Single" Groupable="false">
     <Columns>
         <PropertyColumn Property="x=>x.Nome" />
-        <PropertyColumn Property="x=>x.Email" />
-        <PropertyColumn Property="x=>x.Celular" />
-        <PropertyColumn Property="x=>x.DataNascimento" Format="dd/MM/yyyy" />
-        <PropertyColumn Property="x=>x.DataCadastro" Format="dd/MM/yyyy" />
         <TemplateColumn>
             <CellTemplate>
                 <MudStack Row>
@@ -30,7 +26,7 @@
                     <MudFab Size="Size.Small"
                             Label="Excluir"
                             hidden="@HideButtons"
-                            @onclick="@(()=> DeleteUsuario(context.Item))"
+                            @onclick="@(()=> DeleteEspecialidade(context.Item))"
                             StartIcon="@Icons.Material.Filled.Delete"
                             Color="Color.Error" />
                 </MudStack>
@@ -39,9 +35,24 @@
     </Columns>
 </MudDataGrid>
 
+<CriarEspecialidade Visible="VisibleNovo" OnClose="CloseCriar"></CriarEspecialidade>
+<EditarEspecialidade Visible="VisibleEditar" OnClose="CloseEditar" EspecialidadeId="EspecialidadeId"></EditarEspecialidade>
+
 @code {
-    private List<Usuario> Usuarios { get; set; }
+    private List<Especialidade> Especialidades { get; set; } = new();
     private bool HideButtons = false;
+    private bool VisibleEditar = false;
+    private bool VisibleNovo = false;
+    private int EspecialidadeId = 0;
+
+
+    private void OpenEditar() => VisibleEditar = true;
+
+    private void CloseEditar() => VisibleEditar = false;
+
+    private void OpenCriar() => VisibleNovo = true;
+
+    private void CloseCriar() => VisibleNovo = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -49,29 +60,32 @@
 
         if (firstRender)
         {
-            Usuarios = await CarregarUsuarios();
+            var temp = await CarregarEspecialidades();
+            if (temp != null)
+                Especialidades = temp;
         }
     }
 
-    private async Task<List<Usuario>> CarregarUsuarios()
+    private async Task<List<Especialidade>> CarregarEspecialidades()
     {
 
-        UsuarioService usuarioService = new();
-        return await usuarioService.ConsultarUsuarios();
+        EspecialidadeService especialidadeService = new();
+        return await especialidadeService.ConsultarEspecialidades();
     }
 
-    private async void DeleteUsuario(Usuario usuario)
+    private async void DeleteEspecialidade(Especialidade especialidade)
     {
-        UsuarioService usuarioService = new();
-        await usuarioService.DeleteUsuario(usuario.Id);
+        EspecialidadeService especialidadeService = new();
+        await especialidadeService.DeleteEspecialidade(especialidade.Id);
 
-        Usuarios = await CarregarUsuarios();
+        Especialidades = await CarregarEspecialidades();
 
         StateHasChanged();
     }
 
-    private void GoToUpdate(int usuarioId)
+    private void GoToUpdate(int especialidadeId)
     {
-        Navigation.NavigateTo($"/usuarios/editar/{usuarioId}");
+        EspecialidadeId = especialidadeId;
+        OpenEditar();
     }
 }

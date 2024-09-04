@@ -32,9 +32,7 @@
 </MudDialog>
 
 @code {
-
-    [Parameter]
-    public int EspecialidadeId { get; set; }
+    public IndisponibilidadeInputModel InputModel { get; set; } = new();
 
     [Parameter]
     public bool Visible { get; set; }
@@ -44,32 +42,10 @@
 
     private async Task Close() => await OnClose.InvokeAsync(null);
 
-    public EspecialidadeInputModel InputModel { get; set; } = new();
-    private Especialidade Especialidade = new();
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
-        {
-            Especialidade = await CarregarEspecialidade();
-            if (Especialidade != null)
-                InputModel.Nome = Especialidade.Nome;
-        }
-    }
-
-    public async Task<Especialidade> CarregarEspecialidade()
-    {
-        EspecialidadeService especialidadeService = new();
-        return await especialidadeService.ConsultarEspecialidade(EspecialidadeId);
-    }
-
     public async Task OnValidSubmitAsync()
     {
 
-        EspecialidadeService especialidadeService = new();
-        await especialidadeService.AtualizarEspecialidade(InputModel);
+        IndisponibilidadeService indisponibilidadeService = new();
+        await indisponibilidadeService.InserirIndisponibilidade(InputModel);
     }
-
 }

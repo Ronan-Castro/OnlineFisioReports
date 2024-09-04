@@ -51,5 +51,13 @@ namespace FisioOnlineReports.EndPoints
         {
             return $"/v1/especialidades/{id}";
         }
+        public static string Indisponibilidades()
+        {
+            return $"/v1/indisponibilidades";
+        }
+        public static string IndisponibilidadeId(int id)
+        {
+            return $"/v1/indisponibilidades/{id}";
+        }
     }
 }
