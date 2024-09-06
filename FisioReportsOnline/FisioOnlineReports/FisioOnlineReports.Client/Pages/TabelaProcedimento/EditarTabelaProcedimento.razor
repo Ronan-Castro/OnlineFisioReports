@@ -1,0 +1,75 @@
+﻿<MudDialog @bind-Visible="Visible">
+    <DialogContent>
+
+        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+            <DataAnnotationsValidator />
+
+            <MudTextField Label="Nome"
+                          Variant="Variant.Outlined"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Nome"
+                          For="@(()=> InputModel.Nome)" />
+
+            <MudDivider Class="m-4" />
+
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Save"
+                       Color="Color.Info"
+                       Size="Size.Large"
+                       ButtonType="ButtonType.Submit">
+                Salvar
+            </MudButton>
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Close"
+                       Color="Color.Info"
+                       Size="Size.Large"
+                       OnClick="Close">
+                Fechar
+            </MudButton>
+
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+
+    [Parameter]
+    public int TabelaProcedimentoId { get; set; }
+    
+    [Parameter]
+    public bool Visible { get; set; }
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    private async Task Close() => await OnClose.InvokeAsync(null);
+
+    public TabelaProcedimentoInputModel InputModel { get; set; } = new();
+    private TabelaProcedimento TabelaProcedimento = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            TabelaProcedimento = await CarregarTabelaProcedimento();
+            if(TabelaProcedimento != null)
+                InputModel.Nome = TabelaProcedimento.Nome;
+        }
+    }
+
+    public async Task<TabelaProcedimento> CarregarTabelaProcedimento()
+    {
+        TabelaProcedimentoService tabelaProcedimentoService = new();
+        return await tabelaProcedimentoService.ConsultarTabelaProcedimento(TabelaProcedimentoId);
+    }
+
+    public async Task OnValidSubmitAsync()
+    {
+
+        TabelaProcedimentoService tabelaProcedimentoService= new();
+        await tabelaProcedimentoService.AtualizarTabelaProcedimento(InputModel);
+    }
+
+}

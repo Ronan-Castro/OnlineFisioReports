@@ -1,0 +1,91 @@
+﻿@page "/tabelaProcedimentos"
+
+
+<MudText Typo="Typo.h3">TabelaProcedimentos</MudText>
+
+<MudButton Variant="Variant.Filled"
+           StartIcon="@Icons.Material.Filled.Add"
+           Color="Color.Info"
+           Size="Size.Large"
+           @onclick="@(()=> OpenCriar())"
+           Class="mt-md-4 mb-4">Novo TabelaProcedimento</MudButton>
+
+<MudDataGrid Items="@TabelaProcedimentos" Filterable="false" SortMode="@SortMode.Single" Groupable="false">
+    <Columns>
+        <PropertyColumn Property="x=>x.Nome" />
+        <TemplateColumn>
+            <CellTemplate>
+                <MudStack Row>
+                    <MudFab Size="Size.Small"
+                            Label="Editar"
+                            hidden="@HideButtons"
+                            @onclick="@(()=> GoToUpdate(context.Item.Id))"
+                            StartIcon="@Icons.Material.Filled.Edit"
+                            Color="Color.Success" />
+
+                    <MudFab Size="Size.Small"
+                            Label="Excluir"
+                            hidden="@HideButtons"
+                            @onclick="@(()=> DeleteTabelaProcedimento(context.Item))"
+                            StartIcon="@Icons.Material.Filled.Delete"
+                            Color="Color.Error" />
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>
+
+<CriarTabelaProcedimento Visible="VisibleNovo" OnClose="CloseCriar"></CriarTabelaProcedimento>
+<EditarTabelaProcedimento Visible="VisibleEditar" OnClose="CloseEditar" TabelaProcedimentoId="TabelaProcedimentoId"></EditarTabelaProcedimento>
+
+@code {
+    private List<TabelaProcedimento> TabelaProcedimentos { get; set; } = new();
+    private bool HideButtons = false;
+    private bool VisibleEditar = false;
+    private bool VisibleNovo = false;
+    private int TabelaProcedimentoId = 0;
+
+
+    private void OpenEditar() => VisibleEditar = true;
+
+    private void CloseEditar() => VisibleEditar = false;
+
+    private void OpenCriar() => VisibleNovo = true;
+
+    private void CloseCriar() => VisibleNovo = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            var temp = await CarregarTabelaProcedimentos();
+            if (temp != null)
+                TabelaProcedimentos = temp;
+        }
+    }
+
+    private async Task<List<TabelaProcedimento>> CarregarTabelaProcedimentos()
+    {
+
+        TabelaProcedimentoService tabelaProcedimentoService = new();
+        return await tabelaProcedimentoService.ConsultarTabelaProcedimentos();
+    }
+
+    private async void DeleteTabelaProcedimento(TabelaProcedimento tabelaProcedimento)
+    {
+        TabelaProcedimentoService tabelaProcedimentoService = new();
+        await tabelaProcedimentoService.DeleteTabelaProcedimento(tabelaProcedimento.Id);
+
+        TabelaProcedimentos = await CarregarTabelaProcedimentos();
+
+        StateHasChanged();
+    }
+
+    private void GoToUpdate(int tabelaProcedimentoId)
+    {
+        TabelaProcedimentoId = tabelaProcedimentoId;
+        OpenEditar();
+    }
+}

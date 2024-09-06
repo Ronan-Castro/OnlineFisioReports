@@ -67,5 +67,21 @@ namespace FisioOnlineReports.EndPoints
         {
             return $"/v1/indisponibilidades/ambiente/{ambienteId}";
         }
+        public static string ProcedimentoId(int id)
+        {
+            return $"/v1/procedimentos/{id}";
+        }
+        public static string Procedimentos()
+        {
+            return $"/v1/procedimentos";
+        }
+        public static string TabelaProcedimentoId(int id)
+        {
+            return $"/v1/tabelaprocedimentos/{id}";
+        }
+        public static string TabelaProcedimentos()
+        {
+            return $"/v1/tabelaprocedimentos";
+        }
     }
 }

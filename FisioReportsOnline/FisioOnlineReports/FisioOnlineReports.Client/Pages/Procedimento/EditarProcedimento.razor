@@ -1,0 +1,75 @@
+﻿<MudDialog @bind-Visible="Visible">
+    <DialogContent>
+
+        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+            <DataAnnotationsValidator />
+
+            <MudTextField Label="Nome"
+                          Variant="Variant.Outlined"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Nome"
+                          For="@(()=> InputModel.Nome)" />
+
+            <MudDivider Class="m-4" />
+
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Save"
+                       Color="Color.Info"
+                       Size="Size.Large"
+                       ButtonType="ButtonType.Submit">
+                Salvar
+            </MudButton>
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Close"
+                       Color="Color.Info"
+                       Size="Size.Large"
+                       OnClick="Close">
+                Fechar
+            </MudButton>
+
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+
+    [Parameter]
+    public int ProcedimentoId { get; set; }
+    
+    [Parameter]
+    public bool Visible { get; set; }
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    private async Task Close() => await OnClose.InvokeAsync(null);
+
+    public ProcedimentoInputModel InputModel { get; set; } = new();
+    private Procedimento Procedimento = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            Procedimento = await CarregarProcedimento();
+            if(Procedimento != null)
+                InputModel.Nome = Procedimento.Nome;
+        }
+    }
+
+    public async Task<Procedimento> CarregarProcedimento()
+    {
+        ProcedimentoService procedimentoService = new();
+        return await procedimentoService.ConsultarProcedimento(ProcedimentoId);
+    }
+
+    public async Task OnValidSubmitAsync()
+    {
+
+        ProcedimentoService procedimentoService= new();
+        await procedimentoService.AtualizarProcedimento(InputModel);
+    }
+
+}
