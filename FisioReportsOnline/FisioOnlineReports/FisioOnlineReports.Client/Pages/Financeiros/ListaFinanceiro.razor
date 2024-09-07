@@ -1,0 +1,91 @@
+﻿@page "/financeiros"
+
+
+<MudText Typo="Typo.h3">Financeiros</MudText>
+
+<MudButton Variant="Variant.Filled"
+           StartIcon="@Icons.Material.Filled.Add"
+           Color="Color.Info"
+           Size="Size.Large"
+           @onclick="@(()=> OpenCriar())"
+           Class="mt-md-4 mb-4">Novo Financeiro</MudButton>
+
+<MudDataGrid Items="@Financeiros" Filterable="false" SortMode="@SortMode.Single" Groupable="false">
+    <Columns>
+        <PropertyColumn Property="x=>x.Nome" />
+        <TemplateColumn>
+            <CellTemplate>
+                <MudStack Row>
+                    <MudFab Size="Size.Small"
+                            Label="Editar"
+                            hidden="@HideButtons"
+                            @onclick="@(()=> GoToUpdate(context.Item.Id))"
+                            StartIcon="@Icons.Material.Filled.Edit"
+                            Color="Color.Success" />
+
+                    <MudFab Size="Size.Small"
+                            Label="Excluir"
+                            hidden="@HideButtons"
+                            @onclick="@(()=> DeleteFinanceiro(context.Item))"
+                            StartIcon="@Icons.Material.Filled.Delete"
+                            Color="Color.Error" />
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>
+
+<CriarFinanceiro Visible="VisibleNovo" OnClose="CloseCriar"></CriarFinanceiro>
+<EditarFinanceiro Visible="VisibleEditar" OnClose="CloseEditar" FinanceiroId="FinanceiroId"></EditarFinanceiro>
+
+@code {
+    private List<Financeiro> Financeiros { get; set; } = new();
+    private bool HideButtons = false;
+    private bool VisibleEditar = false;
+    private bool VisibleNovo = false;
+    private int FinanceiroId = 0;
+
+
+    private void OpenEditar() => VisibleEditar = true;
+
+    private void CloseEditar() => VisibleEditar = false;
+
+    private void OpenCriar() => VisibleNovo = true;
+
+    private void CloseCriar() => VisibleNovo = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            var temp = await CarregarFinanceiros();
+            if (temp != null)
+                Financeiros = temp;
+        }
+    }
+
+    private async Task<List<Financeiro>> CarregarFinanceiros()
+    {
+
+        FinanceiroService financeiroService = new();
+        return await financeiroService.ConsultarFinanceiros();
+    }
+
+    private async void DeleteFinanceiro(Financeiro financeiro)
+    {
+        FinanceiroService financeiroService = new();
+        await financeiroService.DeleteFinanceiro(financeiro.Id);
+
+        Financeiros = await CarregarFinanceiros();
+
+        StateHasChanged();
+    }
+
+    private void GoToUpdate(int financeiroId)
+    {
+        FinanceiroId = financeiroId;
+        OpenEditar();
+    }
+}

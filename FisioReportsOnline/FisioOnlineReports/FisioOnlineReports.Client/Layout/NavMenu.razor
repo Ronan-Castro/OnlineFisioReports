@@ -1,8 +1,15 @@
 ﻿
 <MudNavMenu>
-    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
-    <MudNavLink Href="counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Counter</MudNavLink>
-    <MudNavLink Href="weather" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Weather</MudNavLink>
+    <MudNavLink Href="home" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+    <MudNavLink Href="pacientes" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.PeopleAlt">Pacientes</MudNavLink>
+    <MudNavLink Href="agenda" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.CalendarMonth">Agenda</MudNavLink>
+    <MudNavLink Href="usuarios" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.PeopleOutline">Usuarios</MudNavLink>
+    <MudNavLink Href="ambientes" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.RoomPreferences">Ambientes</MudNavLink>
+    <MudNavGroup Title="Procedimentos">
+    <MudNavLink Href="procedimentos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Lista de Procedimentos</MudNavLink>
+        <MudNavLink Href="tabelaProcedimentos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.TableView">Tabelas</MudNavLink>
+    </MudNavGroup>
+    <MudNavLink Href="especialidades" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Assignment">Especialidades</MudNavLink>
 </MudNavMenu>
 
 

@@ -1,5 +1,4 @@
 ﻿using FisioOnlineReports.Client.Pages.Procedimento;
-using FisioOnlineReports.Client.Pages.Procedimentos;
 using FisioOnlineReports.EndPoints;
 using FisioOnlineReports.Models;
 using FisioOnlineReports.Service;

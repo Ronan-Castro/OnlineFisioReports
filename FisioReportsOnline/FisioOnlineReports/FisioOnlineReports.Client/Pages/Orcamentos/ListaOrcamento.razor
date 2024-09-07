@@ -1,0 +1,91 @@
+﻿@page "/orcamentos"
+
+
+<MudText Typo="Typo.h3">Orcamentos</MudText>
+
+<MudButton Variant="Variant.Filled"
+           StartIcon="@Icons.Material.Filled.Add"
+           Color="Color.Info"
+           Size="Size.Large"
+           @onclick="@(()=> OpenCriar())"
+           Class="mt-md-4 mb-4">Novo Orcamento</MudButton>
+
+<MudDataGrid Items="@Orcamentos" Filterable="false" SortMode="@SortMode.Single" Groupable="false">
+    <Columns>
+        <PropertyColumn Property="x=>x.Nome" />
+        <TemplateColumn>
+            <CellTemplate>
+                <MudStack Row>
+                    <MudFab Size="Size.Small"
+                            Label="Editar"
+                            hidden="@HideButtons"
+                            @onclick="@(()=> GoToUpdate(context.Item.Id))"
+                            StartIcon="@Icons.Material.Filled.Edit"
+                            Color="Color.Success" />
+
+                    <MudFab Size="Size.Small"
+                            Label="Excluir"
+                            hidden="@HideButtons"
+                            @onclick="@(()=> DeleteOrcamento(context.Item))"
+                            StartIcon="@Icons.Material.Filled.Delete"
+                            Color="Color.Error" />
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>
+
+<CriarOrcamento Visible="VisibleNovo" OnClose="CloseCriar"></CriarOrcamento>
+<EditarOrcamento Visible="VisibleEditar" OnClose="CloseEditar" OrcamentoId="OrcamentoId"></EditarOrcamento>
+
+@code {
+    private List<Orcamento> Orcamentos { get; set; } = new();
+    private bool HideButtons = false;
+    private bool VisibleEditar = false;
+    private bool VisibleNovo = false;
+    private int OrcamentoId = 0;
+
+
+    private void OpenEditar() => VisibleEditar = true;
+
+    private void CloseEditar() => VisibleEditar = false;
+
+    private void OpenCriar() => VisibleNovo = true;
+
+    private void CloseCriar() => VisibleNovo = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            var temp = await CarregarOrcamentos();
+            if (temp != null)
+                Orcamentos = temp;
+        }
+    }
+
+    private async Task<List<Orcamento>> CarregarOrcamentos()
+    {
+
+        OrcamentoService orcamentoService = new();
+        return await orcamentoService.ConsultarOrcamentos();
+    }
+
+    private async void DeleteOrcamento(Orcamento orcamento)
+    {
+        OrcamentoService orcamentoService = new();
+        await orcamentoService.DeleteOrcamento(orcamento.Id);
+
+        Orcamentos = await CarregarOrcamentos();
+
+        StateHasChanged();
+    }
+
+    private void GoToUpdate(int orcamentoId)
+    {
+        OrcamentoId = orcamentoId;
+        OpenEditar();
+    }
+}
