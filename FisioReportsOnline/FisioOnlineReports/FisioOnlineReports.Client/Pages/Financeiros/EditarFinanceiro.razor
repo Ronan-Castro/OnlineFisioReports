@@ -35,7 +35,7 @@
 
     [Parameter]
     public int FinanceiroId { get; set; }
-    
+
     [Parameter]
     public bool Visible { get; set; }
 
@@ -53,23 +53,17 @@
 
         if (firstRender)
         {
-            Financeiro = await CarregarFinanceiro();
-            if(Financeiro != null)
-                InputModel.Nome = Financeiro.Nome;
         }
     }
 
     public async Task<Financeiro> CarregarFinanceiro()
     {
-        FinanceiroService financeiroService = new();
-        return await financeiroService.ConsultarFinanceiro(FinanceiroId);
+        return null;
     }
 
     public async Task OnValidSubmitAsync()
     {
 
-        FinanceiroService financeiroService= new();
-        await financeiroService.AtualizarFinanceiro(InputModel);
     }
 
 }

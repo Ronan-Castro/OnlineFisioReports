@@ -1,8 +1,8 @@
-﻿using FisioOnlineReports.Client.Pages.Ambientes;
-using FisioOnlineReports.EndPoints;
+﻿using FisioOnlineReports.EndPoints;
 using FisioOnlineReports.Models;
 using FisioOnlineReports.Service;
 using FisioOnlineReports.Utils;
+using LibFisioOnline.InputModels;
 using LibFisioOnline.Models;
 using Newtonsoft.Json;
 

@@ -12,7 +12,7 @@
 
 <MudDataGrid Items="@Financeiros" Filterable="false" SortMode="@SortMode.Single" Groupable="false">
     <Columns>
-        <PropertyColumn Property="x=>x.Nome" />
+        <PropertyColumn Property="x=>x.Descricao" />
         <TemplateColumn>
             <CellTemplate>
                 <MudStack Row>
@@ -68,19 +68,11 @@
 
     private async Task<List<Financeiro>> CarregarFinanceiros()
     {
-
-        FinanceiroService financeiroService = new();
-        return await financeiroService.ConsultarFinanceiros();
+        return null;
     }
 
     private async void DeleteFinanceiro(Financeiro financeiro)
     {
-        FinanceiroService financeiroService = new();
-        await financeiroService.DeleteFinanceiro(financeiro.Id);
-
-        Financeiros = await CarregarFinanceiros();
-
-        StateHasChanged();
     }
 
     private void GoToUpdate(int financeiroId)

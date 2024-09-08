@@ -1,8 +1,8 @@
-﻿using FisioOnlineReports.Client.Pages.Pacientes;
-using FisioOnlineReports.EndPoints;
+﻿using FisioOnlineReports.EndPoints;
 using FisioOnlineReports.Models;
 using FisioOnlineReports.Service;
 using FisioOnlineReports.Utils;
+using LibFisioOnline.InputModels;
 using LibFisioOnline.Models;
 using Newtonsoft.Json;
 
@@ -18,7 +18,7 @@ namespace FisioOnlineReports.Client.Service
 
                 var (JsonResposta, CodigoResposta) = await http.SendGetRequestAsync(ApiFisio.Pacientes());
 
-                if (CodigoResposta.IsSuccessStatusCode)
+                if (CodigoResposta != null && CodigoResposta.IsSuccessStatusCode)
                 {
                     var apiResponse = JsonConvert.DeserializeObject<ApiResponse<List<Paciente>>>(JsonResposta);
                     if (apiResponse != null)
@@ -99,7 +99,7 @@ namespace FisioOnlineReports.Client.Service
 
                 var (JsonResposta, CodigoResposta) = await http.SendPostRequestAsync(ApiFisio.Pacientes(), jsonString);
 
-                if (CodigoResposta.IsSuccessStatusCode)
+                if (CodigoResposta != null && CodigoResposta.IsSuccessStatusCode)
                 {
                     var apiResponse = JsonConvert.DeserializeObject<ApiResponse<Paciente>>(JsonResposta);
                     if (apiResponse != null)

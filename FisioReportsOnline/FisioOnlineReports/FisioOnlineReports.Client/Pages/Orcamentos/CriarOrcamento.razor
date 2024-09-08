@@ -4,11 +4,11 @@
         <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
             <DataAnnotationsValidator />
 
-            <MudTextField Label="Nome"
+            <MudTextField Label="Desconto"
                             Variant="Variant.Outlined"
                             HelperText="Campo obrigatório"
-                            @bind-Value="InputModel.Nome"
-                            For="@(()=> InputModel.Nome)" />
+                            @bind-Value="InputModel.Desconto"
+                          For="@(()=> InputModel.Desconto)" />
 
             <MudDivider Class="m-4" />
 
@@ -44,8 +44,5 @@
 
     public async Task OnValidSubmitAsync()
     {
-
-        OrcamentoService orcamentoService = new();
-        await orcamentoService.InserirOrcamento(InputModel);
     }
 }

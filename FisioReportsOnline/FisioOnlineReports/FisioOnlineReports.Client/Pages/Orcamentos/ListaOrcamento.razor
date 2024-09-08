@@ -12,7 +12,7 @@
 
 <MudDataGrid Items="@Orcamentos" Filterable="false" SortMode="@SortMode.Single" Groupable="false">
     <Columns>
-        <PropertyColumn Property="x=>x.Nome" />
+        <PropertyColumn Property="x=>x.Desconto" />
         <TemplateColumn>
             <CellTemplate>
                 <MudStack Row>
@@ -68,19 +68,10 @@
 
     private async Task<List<Orcamento>> CarregarOrcamentos()
     {
-
-        OrcamentoService orcamentoService = new();
-        return await orcamentoService.ConsultarOrcamentos();
+        return null;
     }
 
-    private async void DeleteOrcamento(Orcamento orcamento)
-    {
-        OrcamentoService orcamentoService = new();
-        await orcamentoService.DeleteOrcamento(orcamento.Id);
-
-        Orcamentos = await CarregarOrcamentos();
-
-        StateHasChanged();
+    private async void DeleteOrcamento(Orcamento orcamento){
     }
 
     private void GoToUpdate(int orcamentoId)

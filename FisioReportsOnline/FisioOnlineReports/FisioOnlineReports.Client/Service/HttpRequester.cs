@@ -52,7 +52,7 @@ namespace FisioOnlineReports.Service
 
                 StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await _client.PostAsync(url, content);
+                HttpResponseMessage response = await _client.PostAsync(ApiFisio.UrlBase() + url, content);
                 response.EnsureSuccessStatusCode();
 
                 string responseContent = await response.Content.ReadAsStringAsync();
